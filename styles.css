@@ -1,0 +1,67 @@
+/* Estilos basados en el esquema de colores del sitio original */
+body {
+    font-family: Lato, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #212121;
+}
+
+header {
+    background-color: #ffadad;
+    color: #212121;
+    text-align: center;
+    padding: 20px;
+}
+
+nav {
+    background-color: #212121;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #ffbdbd;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: white;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #212121;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #212121;
+    color: white;
+}
+
+a {
+    color: #4285f4;
+}
+
+a:hover {
+    text-decoration: underline;
+}
