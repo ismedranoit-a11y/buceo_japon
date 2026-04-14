@@ -186,3 +186,36 @@ section p {
     margin-top: 0;
     color: #004d40;
 }
+
+
+
+.punto-buceo {
+    display: flex;
+    align-items: stretch; /* Esto hace que ambos lados tengan la misma altura */
+    gap: 20px;            /* Espacio entre la foto y el texto */
+    margin-bottom: 30px;
+    max-width: 800px;     /* O el ancho que prefieras para tu web */
+}
+
+.foto-buceo {
+    flex: 1;              /* Ajusta el ancho de la foto */
+    min-width: 200px;
+}
+
+.foto-buceo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* Clave: hace que la foto rellene el hueco sin deformarse */
+    border-radius: 8px;   /* Opcional: para suavizar las esquinas */
+}
+
+.texto-buceo {
+    flex: 2;              /* El texto ocupa un poco más de espacio que la foto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el texto verticalmente si hay poco contenido */
+}
+
+.texto-buceo h3 {
+    margin-top: 0;        /* Quita el espacio extra arriba del título */
+}
