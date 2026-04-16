@@ -113,11 +113,12 @@ header > p {
 
 /* Contenedor principal para alinear tarjetas */
 .contenedor-proyectos {
-    display: flex;
-    flex-wrap: wrap; /* Si no caben, bajan a la siguiente línea */
-    justify-content: center;
-    gap: 30px;
-    padding: 50px 5%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 20px;
+    padding: 30px 1.5%;
+    max-width: 100vw;
 }
 
 /* La Tarjeta */
@@ -125,10 +126,25 @@ header > p {
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    max-width: 400px;
+    width: 100%;
+    min-width: 0;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column; /* Foto arriba, texto abajo */
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.tarjeta img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Sección de contenido */
@@ -142,6 +158,25 @@ section p {
     text-align: justify;
     line-height: 1.6;
     margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .contenedor-proyectos {
+        gap: 20px;
+        padding: 30px 3%;
+    }
+    .tarjeta {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .contenedor-proyectos {
+        gap: 15px;
+    }
+    .texto-box {
+        padding: 18px;
+    }
 }
 
 /* Control de Imágenes */
@@ -219,3 +254,77 @@ section p {
 .texto-buceo h3 {
     margin-top: 0;        /* Quita el espacio extra arriba del título */
 }
+
+
+
+/* Contenedor de cada bloque de zona de buceo */
+.zona-buceo {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.zona-header {
+    background-color: #00509d;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.zona-header h2 { margin: 0; font-size: 20px; }
+.zona-header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+
+.lista-precios { padding: 15px; }
+
+/* Fila de precio */
+.item-precio {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item-precio:last-child { border-bottom: none; }
+
+.precio-valor {
+    font-weight: bold;
+    color: #00509d;
+}
+
+/* Colores por tipo de salida */
+.playa { border-top: 8px solid #2B3571; }
+.barco { border-top: 8px solid #FFADAD; }
+
+.tabla-precios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-precios th {
+    background-color: #f8f9fa;
+    font-size: 0.8rem;
+    color: #666;
+    padding: 10px;
+    text-align: right;
+}
+
+.tabla-precios td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+/* Alinea el texto del servicio a la izquierda */
+.tabla-precios td:first-child, 
+.tabla-precios th:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.precio { font-weight: bold; color: #00509d; }
