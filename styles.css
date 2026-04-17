@@ -328,3 +328,140 @@ section p {
 }
 
 .precio { font-weight: bold; color: #00509d; }
+
+/* RESPONSIVE MÓVIL */
+@media (max-width: 600px) {
+    /* Navbar responsive */
+    nav {
+        padding: 0 3%;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        gap: 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Contenedor proyectos vertical en móvil */
+    .contenedor-proyectos {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 5%;
+    }
+
+    .tarjeta {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Tablas responsive VERTICAL en móvil */
+    .tabla-precios {
+        display: block;
+        width: 100%;
+        border: none;
+    }
+
+    .tabla-precios thead {
+        display: none;
+    }
+
+    .tabla-precios tbody {
+        display: block;
+    }
+
+    .tabla-precios tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .tabla-precios td {
+        display: block;
+        text-align: left;
+        padding: 8px 0;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tabla-precios td:last-child {
+        border-bottom: none;
+    }
+
+    .tabla-precios td:first-child {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .tabla-precios td.precio {
+        color: #00509d;
+        font-weight: bold;
+    }
+
+    /* Zona buceo */
+    .zona-buceo {
+        margin: 15px auto;
+    }
+
+    .zona-header h2 {
+        font-size: 16px;
+    }
+
+    .zona-header p {
+        font-size: 12px;
+    }
+
+    /* Imagen float */
+    .imagen-box {
+        float: none;
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .imagen-box:nth-child(even) {
+        float: none;
+        margin: 0 0 20px 0;
+    }
+
+    /* Punto de buceo */
+    .punto-buceo {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .foto-buceo {
+        min-width: auto;
+        height: 250px;
+    }
+
+    /* Header responsivo */
+    header {
+        height: 30vh;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    /* Botón responsivo */
+    a[style*="background-color: #ffadad"] {
+        padding: 12px 25px;
+        font-size: 0.85rem;
+    }
+
+    /* Sección principal */
+    section {
+        padding: 20px 10px;
+    }
+}
