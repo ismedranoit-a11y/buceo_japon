@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ismedranoit-a11y.github.io/buceo_japon/index.html</loc>
+    <loc>https://www.buceojapon.com/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ismedranoit-a11y.github.io/buceo_japon/quien-soy.html</loc>
+    <loc>https://www.buceojapon.com/quien-soy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ismedranoit-a11y.github.io/buceo_japon/puntos-buceo.html</loc>
+    <loc>https://www.buceojapon.com/puntos-buceo.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ismedranoit-a11y.github.io/buceo_japon/buceemos-juntos.html</loc>
+    <loc>https://www.buceojapon.com/buceemos-juntos.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
