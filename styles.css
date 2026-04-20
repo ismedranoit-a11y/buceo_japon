@@ -74,6 +74,19 @@ header {
     text-align: center;
 }
 
+/* Imagen específica para la página de Quién Soy */
+#header-sobre-mi {
+    background: linear-gradient(rgba(0,20,40,0.6), rgba(0,20,40,0.6)),
+                url('images/buceo\ loco.jpg');
+                 background-size: cover;
+    background-position: center;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+}
+
 header nav {
     background: transparent;
     height: auto;
