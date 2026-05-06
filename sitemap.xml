@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-<url>
-  <loc>https://www.buceojapon.com/</loc>
-  <lastmod>2026-04-24T12:32:28+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.buceojapon.com/index.html</loc>
-  <lastmod>2026-04-24T12:32:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.buceojapon.com/quien-soy.html</loc>
-  <lastmod>2026-04-24T12:32:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.buceojapon.com/puntos-buceo.html</loc>
-  <lastmod>2026-04-24T12:32:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.buceojapon.com/5%20puntos.html</loc>
-  <lastmod>2026-04-24T12:32:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.buceojapon.com/buceemos-juntos.html</loc>
-  <lastmod>2026-04-24T12:32:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.buceojapon.com/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.buceojapon.com/quien-soy.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.buceojapon.com/puntos-buceo.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.buceojapon.com/5%20puntos.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.buceojapon.com/buceemos-juntos.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.80</priority>
+  </url>
 </urlset>
