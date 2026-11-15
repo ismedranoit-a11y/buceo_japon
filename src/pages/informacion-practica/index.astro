@@ -1,0 +1,35 @@
+---
+import { practicalTopics } from '../../data/content.js';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+---
+<PageLayout
+  title="Información práctica para bucear en Japón | Buceo Japón"
+  description="Cómo llegar, cómo es un día de buceo, seguros y documentación para preparar tu actividad de buceo en Japón."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero
+    jp="実用情報"
+    label="Antes de tu inmersión"
+    title="Información práctica"
+    lead="Encuentra aquí lo necesario para preparar tu jornada de buceo. Confirma siempre los detalles concretos de tu salida antes de viajar."
+  />
+  <section class="py-section">
+    <div class="wrap grid gap-5 md:grid-cols-2">
+      {practicalTopics.map((topic, index) => (
+        <a
+          class:list={[
+            'flex min-h-64 flex-col gap-5 rounded-[24px] p-7 no-underline ring-1 ring-navy/10 md:p-9',
+            index % 2 === 0 ? 'bg-cream' : 'bg-white',
+          ]}
+          href={`/informacion-practica/${topic.slug}/`}
+        >
+          <span class="font-mincho text-sm tracking-[0.2em] text-shu" lang="ja">{topic.kanji}</span>
+          <h2 class="font-display text-[clamp(28px,2.8vw,40px)] leading-tight font-bold">{topic.label}</h2>
+          <p class="text-[17px] leading-[1.7] text-ink">{topic.lead}</p>
+          <span class="mt-auto font-semibold text-shu">Leer más →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</PageLayout>

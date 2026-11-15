@@ -1,0 +1,97 @@
+---
+import { about } from '../data/content.js';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Heading from '../components/ui/Heading.astro';
+
+const body = 'text-[clamp(16px,1.25vw,18px)] leading-[1.8] text-ink';
+const storyPhotos = [
+  { src: '/images/tossa_yo.webp', alt: 'Israel buceando en Tossa de Mar, donde empezó su camino como instructor' },
+  { src: '/images/okinawa_yo.webp', alt: 'Israel en Okinawa, en uno de sus viajes de buceo por Japón' },
+  { src: '/images/yo_solo.webp', alt: 'Israel explorando las aguas de Japón como instructor de buceo' },
+  { src: '/images/fondo%20atami.webp', alt: 'Corales blandos del fondo marino volcánico de Atami, Japón' },
+];
+const storyBlocks = storyPhotos.map((photo, i) => ({
+  photo,
+  paragraphs: about.story.slice(i * 2, i * 2 + 2),
+}));
+---
+<PageLayout
+  title="¿Quién soy? — Israel Medrano, instructor SSI en Japón | Buceo Japón"
+  description="Israel Medrano, instructor de buceo freelance oficial de SSI. Vive en Japón y guía inmersiones en español en Izu."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero jp="自己紹介" label="Instructor SSI en español" title={`Hola, soy ${about.name} ${about.surname}`}
+    lead="Instructor SSI freelance en Japón. Te acompaño bajo el agua, en español y sin prisas." centered />
+
+  <section class="bg-paper py-8 md:py-10">
+    <div class="wrap">
+      <p class="mx-auto max-w-4xl border-l-4 border-shu bg-blush px-5 py-4 text-center font-mincho text-[clamp(21px,2.4vw,30px)] leading-snug text-navy md:px-8">
+        “Buceo simple, cercano y con ganas de enseñarte el buceo en Japón.”
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper py-section">
+    <div class="wrap flex flex-col gap-12 md:gap-16">
+      <header class="max-w-3xl">
+        <Eyebrow>Mi historia</Eyebrow>
+        <Heading class="mt-4">De maestro a instructor</Heading>
+      </header>
+
+      <div class="flex flex-col gap-14 md:gap-20">
+        {storyBlocks.map(({ photo, paragraphs }, i) => (
+          <div class:list={[
+            'grid items-center gap-7 md:gap-10 lg:grid-cols-2 lg:gap-16',
+            (i === 0 || i === 2) && 'lg:[&>figure]:order-1 lg:[&>div]:order-2',
+            i % 2 === 1 && 'lg:[&>figure]:order-2 lg:[&>div]:order-1',
+          ]}>
+            <div class="flex flex-col">
+              {paragraphs.map((p, paragraphIndex) => {
+                const number = i * 2 + paragraphIndex + 1;
+                return (
+                  <div class="grid grid-cols-[42px_1fr] gap-4 border-t border-navy/15 py-5 md:grid-cols-[52px_1fr] md:gap-5">
+                    <span class="font-display text-lg font-semibold tracking-wide text-coral-dark">{String(number).padStart(2, '0')}</span>
+                    <p class:list={[body, 'max-w-[54ch]', number === 1 && 'text-[clamp(18px,1.45vw,21px)] text-navy']}>{p}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <figure class="relative min-h-[260px] overflow-hidden md:min-h-[360px] lg:min-h-[420px]">
+              <img class="absolute inset-0 size-full object-cover" src={photo.src} alt={photo.alt} loading="lazy" />
+            </figure>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 bg-[#FFADAD] px-5 py-6 sm:grid-cols-3 sm:gap-6 md:px-8">
+        {about.miniStats.map((s) => (
+          <div class="flex flex-col items-center gap-1 text-center">
+            <div class="font-display text-2xl leading-tight font-bold text-navy md:text-[34px]">{s.value}</div>
+            <div class="text-sm text-ink">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wave-navy py-section">
+    <div class="wrap flex flex-col gap-[clamp(32px,4vw,48px)]">
+      <Heading class="text-cream">El camino hasta Japón</Heading>
+      <Timeline />
+    </div>
+  </section>
+
+  <section class="py-section">
+    <div class="wrap flex flex-col items-center gap-6 text-center">
+      <div class="flex w-full max-w-4xl flex-col items-center gap-5">
+        <Eyebrow>Cómo buceo</Eyebrow>
+        <blockquote class="w-full border-y-2 border-shu bg-blush px-6 py-7 text-center font-display text-[clamp(28px,2.8vw,40px)] leading-tight font-medium text-navy md:px-9">
+          “{about.quoteLong}”
+        </blockquote>
+      </div>
+    </div>
+  </section>
+</PageLayout>

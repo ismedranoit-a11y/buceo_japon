@@ -1,0 +1,114 @@
+---
+import { practicalTopics } from '../../data/content.js';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import GettingThereGuide from '../../components/sections/GettingThereGuide.astro';
+import DiveDayGuide from '../../components/sections/DiveDayGuide.astro';
+
+export function getStaticPaths() {
+  return practicalTopics.map((topic) => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+---
+<PageLayout
+  title={`${topic.title} | Buceo Japón`}
+  description={topic.lead}
+  ctaTitle="¿Tienes dudas antes de bucear?"
+  ctaText="Escríbeme y revisamos juntos los detalles de tu salida."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero
+    jp={topic.kanji}
+    label="Información práctica"
+    title={topic.title}
+    lead={topic.lead}
+    centered={topic.slug === 'como-llegar' || topic.slug === 'dia-de-buceo' || topic.slug === 'documentacion'}
+    compact={topic.slug === 'como-llegar'}
+    titleClass={topic.slug === 'documentacion' ? 'w-full !text-[clamp(16px,6.5vw,80px)]' : undefined}
+    titleLines={topic.slug === 'documentacion' ? ['Qué documentación', 'necesito'] : undefined}
+  />
+  {topic.slug === 'como-llegar' ? (
+    <GettingThereGuide routes={topic.routes} />
+  ) : topic.slug === 'dia-de-buceo' ? (
+    <DiveDayGuide moments={topic.moments} bring={topic.bring} />
+  ) : (
+    <section class="py-section">
+    <article class="wrap flex max-w-[900px] flex-col gap-8">
+      {topic.sections.map((section) => (
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-[clamp(32px,3.4vw,48px)] leading-tight font-bold">{section.title}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p class="text-[19px] leading-[1.8] text-ink">
+              {typeof paragraph === 'string'
+                ? paragraph
+                : paragraph.map((part) => part.href
+                  ? <a class="font-semibold text-navy underline underline-offset-2" href={part.href} target="_blank" rel="noopener noreferrer">{part.text}</a>
+                  : part.bold ? <strong>{part.text}</strong> : part.text)}
+            </p>
+          ))}
+          {section.items && (
+            <ul class="list-disc space-y-2 pl-6 text-[19px] leading-[1.8] text-ink">
+              {section.items.map((item) => (
+                <li>
+                  {item.href
+                    ? <a class="font-semibold text-navy underline underline-offset-2" href={item.href} target="_blank" rel="noopener noreferrer">{item.lead}</a>
+                    : <strong>{item.lead}</strong>}
+                  {' '}{item.text}
+                </li>
+              ))}
+            </ul>
+          )}
+          {section.callout && (
+            <p class="border-l-4 border-shu bg-blush/50 p-5 text-[19px] leading-[1.8] text-ink">{section.callout}</p>
+          )}
+        </section>
+      ))}
+      {topic.slug === 'documentacion' && (
+        <section class="flex flex-col gap-5 border-t border-navy/15 pt-8">
+          <h2 class="font-display text-[clamp(32px,3.4vw,48px)] leading-tight font-bold">Formularios antes de bucear</h2>
+          <p class="text-[19px] leading-[1.8] text-ink">
+            Son dos documentos distintos que se complementan: uno sirve para revisar tu salud y el otro recoge las condiciones de participación en la salida. Léelos con calma y completa los datos y las declaraciones que correspondan.
+          </p>
+          <div class="flex flex-col gap-8">
+            <section class="flex flex-col gap-4 border-l-4 border-shu bg-blush/50 p-5 md:p-7">
+              <h3 class="font-display text-2xl font-bold text-navy">1. Cuestionario médico del buceador</h3>
+              <p class="text-[17px] leading-[1.8] text-ink">
+                Es un cuestionario de salud de SSI. Te pide responder con sinceridad sobre tu estado físico y antecedentes —por ejemplo, respiración, corazón, oídos, cirugías, medicación y otros aspectos de salud— para identificar si conviene una valoración médica antes de bucear.
+              </p>
+              <ul class="list-disc space-y-2 pl-6 text-[17px] leading-[1.8] text-ink">
+                <li>Si respondes «no» a las diez preguntas iniciales, el propio formulario indica que no hace falta una evaluación médica; tendrás que firmar y fechar la declaración.</li>
+                <li>Si alguna respuesta te dirige a los cuadros de la segunda página o está marcada para valoración, sigue esas instrucciones y consulta con un profesional sanitario. El formulario incluye una página para que el profesional anote su evaluación.</li>
+                <li>Si te encuentras mal, no bucees. El cuestionario no sustituye el consejo de un profesional médico.</li>
+              </ul>
+              <a class="inline-flex min-h-14 items-center justify-center self-start rounded-full bg-navy px-6 text-center font-bold text-cream no-underline hover:bg-navy-deep hover:text-cream" href="/documentos/test_medico_spa.pdf" download>
+                Descargar cuestionario médico (PDF)
+              </a>
+            </section>
+
+            <section class="flex flex-col gap-4 border-l-4 border-navy bg-mist/60 p-5 md:p-7">
+              <h3 class="font-display text-2xl font-bold text-navy">2. Acuerdo de riesgos y condiciones de participación</h3>
+              <p class="text-[17px] leading-[1.8] text-ink">
+                Este es el documento de exoneración. Deja por escrito las condiciones de la salida guiada y confirma que conoces los riesgos propios del buceo antes de participar.
+              </p>
+              <ul class="list-disc space-y-2 pl-6 text-[17px] leading-[1.8] text-ink">
+                <li>Recoge tus datos de contacto y de buceo, como certificación, nivel, número de inmersiones, seguro y contacto de emergencia.</li>
+                <li>Al firmarlo declaras que participas voluntariamente, que estás en condiciones para bucear y que has completado por separado el cuestionario médico. También te comprometes a respetar los límites de tu certificación, las indicaciones del guía, las normas de seguridad y el cuidado de la vida marina.</li>
+                <li>Explica riesgos inherentes a la actividad, como corrientes, cambios de temperatura o barotraumas. En una emergencia autorizas la atención inicial y el traslado necesario; los gastos que no cubra tu seguro corren por tu cuenta.</li>
+                <li>Incluye responsabilidades por daños, condiciones para menores con firma de su tutor, uso de datos personales, una opción para autorizar o no el uso de imágenes y la aplicación de la legislación japonesa.</li>
+                <li>El acuerdo reconoce que no limita responsabilidades que la legislación aplicable no permita excluir o limitar.</li>
+              </ul>
+              <a class="inline-flex min-h-14 items-center justify-center self-start rounded-full border-2 border-navy px-6 text-center font-bold text-navy no-underline hover:bg-navy hover:text-cream" href="/documentos/exoneracion_spa.pdf" download>
+                Descargar acuerdo de participación (PDF)
+              </a>
+            </section>
+          </div>
+        </section>
+      )}
+    </article>
+    </section>
+  )}
+</PageLayout>

@@ -1,0 +1,30 @@
+---
+import { about } from '../../data/content.js';
+import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
+import SectionNumber from './SectionNumber.astro';
+import Hanko from './Hanko.astro';
+import JapaneseHeading from './JapaneseHeading.astro';
+---
+<section class="pt-[clamp(80px,9.7vw,140px)] pb-0">
+  <div class="wrap flex flex-col items-start gap-12 lg:flex-row lg:gap-[72px]">
+    <div class="flex w-full shrink-0 flex-col gap-6 lg:w-[520px] xl:w-[620px]">
+      <SectionNumber kanji="一" label="自己紹介" />
+      <JapaneseHeading>Hola, soy {about.name}</JapaneseHeading>
+      <p class="text-lg leading-[1.9] text-ink">Maestro de primaria convertido en instructor SSI. Me formé en la Costa Brava, trabajé en Koh Lipe (Tailandia) y en 2025 me mudé a Japón con el equipo en la maleta.</p>
+      <p class="text-lg leading-[1.9] text-ink">Hoy soy guía en Atami con The Wind Drops, donde imparto desde Open Water hasta profundo o traje seco.</p>
+      <div class="flex items-start gap-5 border-y border-navy/25 py-7">
+        <Hanko kanji="静" size="sm" />
+        <p class="font-mincho text-xl leading-relaxed font-medium md:text-2xl">“Simplemente me apasiona estar bajo el agua y mostrar el lado submarino de Japón. Es un buceo diferente, lleno de vida y con especies súper interesantes que a muchos les sorprende encontrar aquí”</p>
+      </div>
+    </div>
+    <div class="flex w-full min-w-0 flex-1 gap-4">
+      <PhotoPlaceholder
+        label="Israel buceando"
+        src="/images/yo_solo.webp"
+        class="h-[clamp(260px,56vw,440px)] flex-1 p-4 lg:h-[560px]"
+        labelClass="rounded-none"
+      />
+      <span class="vertical-rl font-mincho text-[22px] font-bold tracking-[0.25em] text-ink md:text-[28px]" lang="ja" aria-hidden="true">海と静けさ</span>
+    </div>
+  </div>
+</section>

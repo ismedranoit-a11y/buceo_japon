@@ -1,0 +1,19 @@
+---
+import { url } from '../../lib/url';
+import Eyebrow from '../ui/Eyebrow.astro';
+
+const cards = [
+  { href: url('razones-izu/'), eyebrow: 'Guía', title: '5 razones para bucear en Izu →', coral: false },
+  { href: url('kuroshio/'), eyebrow: 'Océano', title: 'Conoce la corriente Kuroshio →', coral: true },
+];
+---
+<section class="wave-navy py-section">
+  <div class="wrap grid grid-cols-1 gap-6 md:grid-cols-2">
+    {cards.map((c) => (
+      <a class:list={['flex flex-col gap-3 rounded-3xl p-[clamp(28px,2.8vw,40px)] no-underline', c.coral ? 'bg-coral' : 'bg-cream']} href={c.href}>
+        <Eyebrow class={c.coral ? 'text-navy' : undefined}>{c.eyebrow}</Eyebrow>
+        <span class="font-display text-[clamp(28px,2.8vw,40px)] leading-tight font-bold">{c.title}</span>
+      </a>
+    ))}
+  </div>
+</section>

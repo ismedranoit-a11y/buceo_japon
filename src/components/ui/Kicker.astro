@@ -1,0 +1,9 @@
+---
+interface Props { jp: string; label: string }
+const { jp, label } = Astro.props;
+---
+<div class="flex flex-wrap items-center gap-3">
+  <span class="font-jp text-lg text-coral-dark" lang="ja">{jp}</span>
+  <span class="h-px w-8 bg-coral-dark"></span>
+  <span class="text-sm font-bold uppercase tracking-[1.6px]">{label}</span>
+</div>

@@ -1,0 +1,22 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Stats from '../components/home/Stats.astro';
+import About from '../components/home/About.astro';
+import StoryLink from '../components/home/StoryLink.astro';
+import DiveSites from '../components/home/DiveSites.astro';
+import ShojiPrices from '../components/home/ShojiPrices.astro';
+---
+<PageLayout
+  title="Buceo Japón — 日本の海を潜る · Buceo en Izu y en español"
+  description="Bucea en la península de Izu y la bahía de Suruga con un instructor SSI que te lo explica todo en español."
+>
+  <Hero />
+  <Stats />
+  <About />
+  <StoryLink />
+  <div class="jp-divider wave-navy" aria-hidden="true"></div>
+  <DiveSites />
+  <ShojiPrices />
+</PageLayout>
+---

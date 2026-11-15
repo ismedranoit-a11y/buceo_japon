@@ -1,0 +1,5 @@
+---
+interface Props { size?: 'sm' | 'md'; class?: string }
+const { size = 'sm', class: className } = Astro.props;
+---
+<span class:list={['self-start rounded-full bg-blush px-3 py-1.5 font-bold text-navy', size === 'md' ? 'text-sm' : 'text-[13px]', className]}><slot /></span>

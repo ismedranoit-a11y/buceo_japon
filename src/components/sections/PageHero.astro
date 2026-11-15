@@ -1,0 +1,61 @@
+---
+import Kicker from '../ui/Kicker.astro';
+import CardCream from '../ui/CardCream.astro';
+import Heading from '../ui/Heading.astro';
+
+interface Props {
+  jp: string;
+  label: string;
+  title: string;
+  lead: string;
+  centered?: boolean;
+  titleClass?: string;
+  titleLines?: [string, string];
+  imageSrc?: string;
+  imageAlt?: string;
+  compact?: boolean;
+}
+const { jp, label, title, lead, centered = false, titleClass, titleLines, imageSrc, imageAlt, compact = false } = Astro.props;
+---
+<section
+  class:list={[
+    imageSrc
+      ? 'relative isolate flex min-h-[clamp(400px,48vw,620px)] items-center overflow-hidden bg-navy-deep py-16 md:py-24'
+      : compact
+        ? 'wave-light flex items-center py-8'
+        : 'wave-light flex items-center py-8 md:min-h-[440px] md:py-12',
+  ]}
+>
+  {imageSrc && (
+    <>
+      <img
+        class="absolute inset-0 size-full object-cover"
+        src={imageSrc}
+        alt={imageAlt ?? title}
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-deep/90 via-navy-deep/65 to-navy-deep/25"></div>
+    </>
+  )}
+  <div class="wrap">
+    {imageSrc ? (
+      <div class="relative z-[1] flex max-w-3xl flex-col gap-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="font-jp text-lg text-cream" lang="ja">{jp}</span>
+          <span class="h-px w-8 bg-sun"></span>
+          <span class="text-sm font-bold uppercase tracking-[1.6px] text-cream">{label}</span>
+        </div>
+        <Heading as="h1" size="page" class="text-cream">{title}</Heading>
+        <p class="max-w-2xl text-[clamp(17px,1.4vw,20px)] leading-relaxed text-cream/95">{lead}</p>
+      </div>
+    ) : (
+      <CardCream class:list={['flex w-[820px] max-w-full flex-col gap-5', centered && 'mx-auto items-center text-center [&>div]:justify-center']}>
+        <Kicker jp={jp} label={label} />
+        <Heading as="h1" size="page" class={titleClass}>
+          {titleLines ? titleLines.map((line) => <span class="block">{line}</span>) : title}
+        </Heading>
+        <p class="text-[clamp(17px,1.4vw,20px)] leading-normal text-ink">{lead}</p>
+      </CardCream>
+    )}
+  </div>
+</section>

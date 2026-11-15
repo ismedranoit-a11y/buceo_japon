@@ -1,0 +1,54 @@
+---
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { diveSites } from '../../data/content.js';
+import { url } from '../../lib/url';
+import SectionNumber from './SectionNumber.astro';
+import JapaneseHeading from './JapaneseHeading.astro';
+
+const imageFiles = new Set(readdirSync(join(process.cwd(), 'public', 'images', 'puntos-buceo')));
+const imageExtensions = ['avif', 'webp', 'jpg', 'jpeg', 'png'];
+const siteCards = diveSites.map((site) => ({
+  ...site,
+  image: imageExtensions.find((extension) => imageFiles.has(`${site.slug}.${extension}`)),
+}));
+---
+<section class="pt-[clamp(32px,4vw,56px)] pb-[clamp(80px,9.7vw,140px)]">
+  <div class="wrap flex flex-col gap-[clamp(32px,4vw,48px)]">
+    <div class="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
+      <div class="flex flex-col gap-6"><SectionNumber kanji="二" label="潜水地" /><JapaneseHeading>Donde buceamos</JapaneseHeading></div>
+      <p class="max-w-[440px] text-[17px] leading-[1.8] text-ink">La península de Izu y la bahía de Suruga: costas volcánicas a un paso de Tokio.</p>
+    </div>
+    <!-- 2 columnas en móvil, 3+2 en tablet y 5 en escritorio -->
+    <div class="grid grid-cols-2 gap-2.5 md:grid-cols-6 md:gap-4 xl:grid-cols-5">
+      {siteCards.map((s, i) => (
+        <a
+          class:list={[
+            'flex flex-col border-t-[6px] border-navy bg-paper no-underline ring-1 ring-navy/15 transition-transform hover:-translate-y-[3px]',
+            i < 3 ? 'md:col-span-2' : 'md:col-span-3',
+            i === 4 && 'max-md:col-span-2',
+            'xl:col-span-1',
+          ]}
+          href={url(`puntos-buceo/#${s.slug}`)}
+        >
+          <div class="flex h-[190px] flex-col items-center justify-center gap-3 border-b border-navy/15 pt-5 md:h-[270px] md:pt-7">
+            <span class="vertical-rl font-mincho text-[28px] font-bold tracking-[0.1em] whitespace-nowrap text-navy md:text-[38px] md:tracking-[0.15em]" lang="ja">{s.kanji}</span>
+          </div>
+          {s.image && (
+            <img
+              class="h-24 w-full object-cover md:h-28"
+              src={`/images/puntos-buceo/${s.slug}.${s.image}`}
+              alt={`${s.name}, punto de buceo en ${s.zone}`}
+              loading="lazy"
+            />
+          )}
+          <div class="flex flex-col gap-2 p-4 md:p-[22px]">
+            <span class="text-xs font-bold uppercase tracking-[1.4px] text-shu">{s.typeJp}</span>
+            <span class="font-mincho text-[22px] font-bold text-navy">{s.name}</span>
+            <span class="text-sm leading-relaxed text-ink">{s.summaryJp}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+/** Fila foto + texto que alterna de lado. Se usa en Puntos de buceo y en 5 razones. */
+import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
+
+interface Props { photo: string; src?: string; reverse?: boolean; numbered?: boolean; id?: string }
+const { photo, src, reverse = false, numbered = false, id } = Astro.props;
+---
+<article
+  id={id}
+  class:list={[
+    'flex scroll-mt-28 flex-col gap-[clamp(32px,5vw,72px)] lg:items-center',
+    reverse ? 'lg:flex-row-reverse' : 'lg:flex-row',
+    numbered && 'border-b border-navy/15 pb-16',
+  ]}
+>
+  <PhotoPlaceholder
+    label={photo}
+    src={src}
+    class:list={[
+      'h-[clamp(220px,50vw,380px)] w-full shrink-0 rounded-[clamp(20px,2vw,28px)]',
+      numbered ? 'lg:h-[320px] lg:w-[480px]' : 'lg:h-[360px] lg:w-[480px] xl:h-[420px] xl:w-[620px]',
+    ]}
+  />
+  <div class="flex min-w-0 flex-1 flex-col gap-4.5">
+    <slot />
+  </div>
+</article>

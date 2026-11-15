@@ -1,0 +1,47 @@
+---
+import { japanTopics, kuroshio } from '../../data/content.js';
+import { url } from '../../lib/url';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+
+const topics = [
+  { href: url('kuroshio/'), label: 'Corriente Kuroshio', lead: kuroshio.lead, kanji: '黒潮' },
+  ...japanTopics.map((topic) => ({
+    href: url(`japon/${topic.slug}/`),
+    label: topic.label,
+    lead: topic.lead,
+    kanji: topic.kanji,
+  })),
+];
+---
+<PageLayout
+  title="Más sobre el buceo en Japón | Buceo Japón"
+  description="Descubre qué hace diferente al buceo en Japón: sus islas, regiones, estaciones, mares templados y la corriente Kuroshio."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero
+    jp="日本の海"
+    label="Una guía para descubrir sus mares"
+    title="Más sobre el buceo en Japón"
+    lead="Un archipiélago, varias zonas climáticas y mares que cambian con las estaciones. Explora algunas claves para entender qué hace único bucear en Japón."
+  />
+  <section class="py-section">
+    <div class="wrap grid gap-5 md:grid-cols-2">
+      {topics.map((topic, index) => (
+        <a
+          class:list={[
+            'flex min-h-64 flex-col gap-5 rounded-[24px] p-7 no-underline ring-1 ring-navy/10 md:p-9',
+            index % 2 === 0 ? 'bg-cream' : 'bg-white',
+          ]}
+          href={topic.href}
+        >
+          <Eyebrow jp={topic.kanji} label="Buceo en Japón" />
+          <h2 class="font-display text-[clamp(28px,2.8vw,40px)] leading-tight font-bold">{topic.label}</h2>
+          <p class="text-[17px] leading-[1.7] text-ink">{topic.lead}</p>
+          <span class="mt-auto font-semibold text-shu">Leer más →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,10 @@
+---
+/** Numeración de sección 一・二・三 con etiqueta en japonés. */
+interface Props { kanji: string; label: string }
+const { kanji, label } = Astro.props;
+---
+<div class="flex items-center gap-4 md:gap-6">
+  <span class="font-mincho text-[28px] font-bold text-shu" lang="ja">{kanji}</span>
+  <span class="h-px w-10 bg-navy md:w-16"></span>
+  <span class="font-mincho text-lg tracking-[0.3em] text-ink" lang="ja">{label}</span>
+</div>

@@ -1,0 +1,35 @@
+---
+import { japanTopics } from '../../data/content.js';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+
+export function getStaticPaths() {
+  return japanTopics.map((topic) => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+---
+<PageLayout
+  title={`${topic.title} | Buceo Japón`}
+  description={topic.lead}
+  ctaTitle="¿Te gustaría descubrir el buceo en Japón?"
+  ctaText="Cuéntame qué te interesa y vemos juntos qué zona y época encajan con tu viaje."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero jp={topic.kanji} label="Más sobre el buceo en Japón" title={topic.title} lead={topic.lead} />
+  <section class="py-section">
+    <article class="wrap flex max-w-[900px] flex-col gap-8">
+      {topic.sections.map((section) => (
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-[clamp(32px,3.4vw,48px)] leading-tight font-bold">{section.title}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p class="text-[19px] leading-[1.8] text-ink">{paragraph}</p>
+          ))}
+        </section>
+      ))}
+    </article>
+  </section>
+</PageLayout>

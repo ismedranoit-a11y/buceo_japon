@@ -1,0 +1,31 @@
+---
+import { isExternal } from '../../lib/url';
+
+interface Props {
+  href: string;
+  variant?: 'coral' | 'navy' | 'outline' | 'outline-light';
+  size?: 'md' | 'lg' | 'custom'; // custom: el tamaño lo da `class`
+  class?: string;
+}
+const { href, variant = 'coral', size = 'md', class: className } = Astro.props;
+const ext = isExternal(href);
+
+const variants = {
+  coral: 'border-transparent bg-coral text-navy hover:bg-coral-hover hover:text-navy',
+  navy: 'border-transparent bg-navy text-cream hover:bg-navy-deep hover:text-cream',
+  outline: 'border-navy text-navy hover:bg-navy hover:text-cream',
+  'outline-light': 'border-cream text-cream hover:bg-cream hover:text-navy',
+};
+const sizes = { md: 'min-h-14 px-[30px] text-[17px]', lg: 'min-h-[60px] px-[34px] text-lg', custom: '' };
+---
+<a
+  class:list={[
+    'inline-flex items-center justify-center rounded-full border-2 text-center font-bold no-underline transition hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+    variants[variant],
+    sizes[size],
+    className,
+  ]}
+  href={href}
+  target={ext ? '_blank' : undefined}
+  rel={ext ? 'noopener' : undefined}
+><slot /></a>

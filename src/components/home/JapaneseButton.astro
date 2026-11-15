@@ -1,0 +1,18 @@
+---
+import { isExternal } from '../../lib/url';
+
+interface Props { href: string; variant?: 'shu' | 'line' | 'navy' | 'coral'; size?: 'md' | 'lg' | 'sm'; class?: string }
+const { href, variant = 'shu', size = 'md', class: className } = Astro.props;
+const sizes = { sm: 'min-h-[50px] px-[26px] text-base', md: 'min-h-[58px] px-8 text-[17px]', lg: 'min-h-[60px] px-[34px] text-lg' };
+const ext = isExternal(href);
+const variants = {
+  shu: 'border-transparent bg-shu text-paper hover:bg-coral-dark hover:text-paper',
+  line: 'border-navy text-navy hover:bg-navy hover:text-washi',
+  navy: 'border-transparent bg-navy text-washi hover:bg-navy-deep hover:text-washi',
+  coral: 'border-transparent bg-coral text-navy hover:bg-coral-hover hover:text-navy',
+};
+---
+<a
+  class:list={['items-center justify-center gap-2.5 border-[1.5px] font-bold no-underline transition-colors', !/(^|\s)hidden(\s|$)/.test(className ?? '') && 'inline-flex', sizes[size], variants[variant], className]}
+  href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener' : undefined}
+><slot /></a>

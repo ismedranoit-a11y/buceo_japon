@@ -1,0 +1,45 @@
+---
+/** Tarjeta de tarifas de un punto: datos a la izquierda, tabla a la derecha. */
+import Pill from '../ui/Pill.astro';
+import Heading from '../ui/Heading.astro';
+
+interface Props {
+  rate: {
+    slug: string; name: string; type: string; meetingPoint: string; note?: string; gear: string;
+    rows: { label: string; price: string }[];
+  };
+}
+const { rate } = Astro.props;
+const grid = 'grid grid-cols-[2fr_1fr] gap-x-2 gap-y-1 tabular-nums';
+const row = `${grid} border-b border-navy/15 py-3.5 md:text-lg`;
+const headRow = `${grid} border-b-2 border-navy pb-3 text-xs font-bold tracking-[0.5px] uppercase md:text-sm md:tracking-[1px]`;
+---
+<article id={rate.slug} class="flex scroll-mt-28 flex-col gap-[clamp(28px,4vw,56px)] rounded-[clamp(20px,2vw,28px)] bg-white p-[clamp(24px,3vw,44px)] ring-1 ring-navy/12 lg:flex-row">
+  <div class="flex w-full shrink-0 flex-col gap-3.5 lg:w-[340px]">
+    <Pill size="md">{rate.type}</Pill>
+    <Heading size="rate">{rate.name}</Heading>
+    <span class="text-[15px] leading-normal text-ink">Punto de encuentro: {rate.meetingPoint}</span>
+    {rate.note && <p class="rounded-xl bg-blush px-4 py-3.5 text-[15px] leading-normal">{rate.note}</p>}
+  </div>
+  <div class="flex min-w-0 flex-1 flex-col">
+    <table class="block w-full text-left">
+      <caption class="sr-only">Tarifas por persona en {rate.name}</caption>
+      <thead class="block">
+        <tr class={headRow}>
+          <th scope="col" class="font-bold">Servicio</th><th scope="col">1 pax</th>
+        </tr>
+      </thead>
+      <tbody class="block">
+        {rate.rows.map((r) => (
+          <tr class={row}>
+            <th scope="row" class="font-semibold">{r.label}</th>
+            <td>{r.price}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <div class="mt-4 flex flex-wrap justify-between gap-x-4 gap-y-2 rounded-xl bg-cream px-5 py-4 text-[15px] md:text-[17px]">
+      <span>Equipo completo (regulador, BCD, traje)</span><strong>{rate.gear} · precio fijo</strong>
+    </div>
+  </div>
+</article>

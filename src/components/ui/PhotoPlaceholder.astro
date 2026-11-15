@@ -1,0 +1,27 @@
+---
+/**
+ * Hueco para una foto. Mientras no haya foto muestra el patrón de olas con
+ * una etiqueta; cuando la haya, pasa `src` y se pinta la imagen.
+ */
+interface Props {
+  label: string;
+  src?: string;
+  class?: string;
+  variant?: 'ph' | 'sea';
+  labelClass?: string;
+}
+const { label, src, class: className, variant = 'ph', labelClass } = Astro.props;
+// Padding por defecto solo si el que lo usa no pasa el suyo (evita clases en conflicto)
+const hasPadding = /(^|\s)([\w-]+:)?p-/.test(className ?? '');
+const hasRadius = /(^|\s)rounded-none/.test(labelClass ?? '');
+---
+<div
+  class:list={['relative flex items-end overflow-hidden', !hasPadding && 'p-5', variant, className]}
+  role={src ? undefined : 'img'}
+  aria-label={src ? undefined : label}
+>
+  {src
+    ? <img class="absolute inset-0 size-full object-cover" src={src} alt={label} loading="lazy" />
+    : <span class:list={['relative z-[1] bg-navy-deep/85 px-2.5 py-1.5 text-[13px] text-cream', !hasRadius && 'rounded-md', labelClass]}>{label}</span>}
+  <slot />
+</div>

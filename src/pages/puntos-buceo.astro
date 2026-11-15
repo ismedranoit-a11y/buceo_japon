@@ -1,0 +1,39 @@
+---
+import { diveSites } from '../data/content.js';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import FeatureRow from '../components/sections/FeatureRow.astro';
+import LinkCards from '../components/sections/LinkCards.astro';
+import Pill from '../components/ui/Pill.astro';
+import Chip from '../components/ui/Chip.astro';
+---
+<PageLayout
+  title="Puntos de buceo en Izu, Atami y Numazu | Buceo Japón"
+  description="Kawana, Atami, Izu Oceanic Park, Yawatano y Osezaki: los puntos donde buceamos en la península de Izu y la bahía de Suruga."
+  ctaTitle="¿Otro destino en mente?"
+  ctaText="Okinawa, las islas o cualquier rincón de Japón: cuéntame y organizamos el viaje de buceo."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero jp="潜水ポイント" label="Izu · Atami · Numazu" title="Puntos de buceo"
+    lead="Donde trabajo habitualmente. ¿Quieres bucear en otro lugar? Escríbeme y organizamos el viaje donde quieras." />
+
+  <section class="py-section">
+    <div class="wrap flex flex-col gap-14 lg:gap-[72px]">
+      {diveSites.map((s, i) => (
+        <FeatureRow id={s.slug} photo={s.photo} src={s.photoSrc} reverse={i % 2 === 1}>
+          <div class="flex flex-wrap items-center gap-3.5">
+            <span class="font-display text-xl font-bold text-coral-dark">{String(i + 1).padStart(2, '0')}</span>
+            <Pill size="md">{s.type}</Pill>
+            <span class="text-[15px] text-ink">{s.zone}</span>
+          </div>
+          <h2 class="font-display text-[clamp(40px,3.9vw,56px)] leading-none font-bold tracking-[-0.5px]">{s.name}</h2>
+          <p class="text-lg leading-[1.7] text-ink">{s.description}</p>
+          <div class="flex flex-wrap gap-2.5">{s.chips.map((c) => <Chip>{c}</Chip>)}</div>
+        </FeatureRow>
+      ))}
+    </div>
+  </section>
+
+  <LinkCards />
+  <div class="h-[clamp(64px,9vw,128px)]"></div>
+</PageLayout>

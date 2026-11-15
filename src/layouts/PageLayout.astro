@@ -1,0 +1,39 @@
+---
+import '@fontsource/shippori-mincho-b1/japanese-500.css';
+import '@fontsource/shippori-mincho-b1/latin-500.css';
+import '@fontsource/shippori-mincho-b1/latin-ext-500.css';
+import '@fontsource/shippori-mincho-b1/japanese-700.css';
+import '@fontsource/shippori-mincho-b1/latin-700.css';
+import '@fontsource/shippori-mincho-b1/latin-ext-700.css';
+import '@fontsource/shippori-mincho-b1/japanese-800.css';
+import '@fontsource/shippori-mincho-b1/latin-800.css';
+import '@fontsource/shippori-mincho-b1/latin-ext-800.css';
+import '@fontsource/zen-kaku-gothic-new/japanese-400.css';
+import '@fontsource/zen-kaku-gothic-new/latin-400.css';
+import '@fontsource/zen-kaku-gothic-new/latin-ext-400.css';
+import '@fontsource/zen-kaku-gothic-new/japanese-500.css';
+import '@fontsource/zen-kaku-gothic-new/latin-500.css';
+import '@fontsource/zen-kaku-gothic-new/latin-ext-500.css';
+import '@fontsource/zen-kaku-gothic-new/japanese-700.css';
+import '@fontsource/zen-kaku-gothic-new/latin-700.css';
+import '@fontsource/zen-kaku-gothic-new/latin-ext-700.css';
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import CallToAction from '../components/layout/CallToAction.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ctaTitle?: string;
+  ctaText?: string;
+  bodyClass?: string;
+}
+const { title, description, ctaTitle, ctaText, bodyClass = 'bg-washi font-gothic' } = Astro.props;
+---
+<BaseLayout title={title} description={description} bodyClass={bodyClass}>
+  <Header slot="header" />
+  <slot />
+  <CallToAction title={ctaTitle} text={ctaText} />
+  <Footer slot="footer" />
+</BaseLayout>

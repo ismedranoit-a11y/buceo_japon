@@ -1,0 +1,25 @@
+{
+  "name": "buceojapon-web",
+  "private": true,
+  "description": "Web de Buceo Japón hecha con Astro y Tailwind CSS",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "publish:pages": "npm run build && node scripts/publish-pages.mjs"
+  },
+  "engines": {
+    "node": ">=18.20"
+  },
+  "devDependencies": {
+    "@fontsource/figtree": "^5.2.0",
+    "@fontsource/oswald": "^5.2.0",
+    "@fontsource/shippori-mincho": "^5.2.0",
+    "@fontsource/shippori-mincho-b1": "^5.2.0",
+    "@fontsource/zen-kaku-gothic-new": "^5.2.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.18.0",
+    "prettier": "^3.3.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

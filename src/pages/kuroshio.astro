@@ -1,0 +1,126 @@
+---
+import { kuroshio } from '../data/content.js';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import { url } from '../lib/url';
+const [introSection, ...sections] = kuroshio.sections;
+---
+<PageLayout
+  title="La corriente Kuroshio y el buceo en Izu | Buceo Japón"
+  description="Descubre cómo influye la corriente Kuroshio en la vida marina y el buceo de la península de Izu, cerca de Tokio."
+  ctaTitle="¿Te vienes a conocer el mar de Izu?"
+  ctaText="La Kuroshio pone parte del contexto; el resto lo descubrimos inmersión a inmersión. Cuéntame cuándo vienes y buscamos el punto que mejor encaje."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero
+    jp="黒潮"
+    label="Izu · Japón"
+    title="Kuroshio: la gran corriente de Izu"
+    lead={kuroshio.lead}
+    imageSrc="/images/puntos-buceo/atami.webp"
+    imageAlt="Corales blandos y roca volcánica en el fondo marino de Atami"
+  />
+
+  <section class="border-b-4 border-shu bg-white py-section">
+    <div class="wrap">
+      <article id={introSection.id} class="flex flex-col gap-5">
+        <h2 class="font-display text-[clamp(32px,3.4vw,48px)] leading-[1.08] font-bold">{introSection.title}</h2>
+        {introSection.paragraphs.map((paragraph) => <p class="text-[18px] leading-[1.8] text-ink">{paragraph}</p>)}
+      </article>
+    </div>
+  </section>
+
+  <section class="py-section">
+    <div class="wrap flex flex-col gap-12">
+      <div class="grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-end lg:gap-16">
+        <div class="flex flex-col gap-4">
+          <Eyebrow jp="黒潮と伊豆" label="Una corriente, muchas historias" />
+          <h2 class="font-display text-[clamp(36px,4vw,56px)] leading-[1.08] font-bold">
+            El mar del sur, un poco más cerca de Tokio
+          </h2>
+        </div>
+        <p class="text-[19px] leading-[1.8] text-ink">
+          La Kuroshio conecta aguas tropicales con las costas japonesas y ayuda a explicar por qué Izu tiene una vida marina tan variada. Y si estás en Tokio, esta península volcánica está mucho más a mano que las islas del sur.
+        </p>
+      </div>
+
+      <div class="grid gap-px bg-navy/15 sm:grid-cols-3">
+        <article class="flex flex-col gap-2 bg-washi p-6 md:p-8">
+          <span class="font-display text-sm font-bold tracking-[0.12em] text-shu">RECORRIDO</span>
+          <h3 class="font-display text-2xl font-bold">Del sur hacia Japón</h3>
+          <p class="leading-relaxed text-ink">Una corriente cálida del Pacífico que fluye junto al archipiélago.</p>
+        </article>
+        <article class="flex flex-col gap-2 bg-washi p-6 md:p-8">
+          <span class="font-display text-sm font-bold tracking-[0.12em] text-shu">INFLUENCIA</span>
+          <h3 class="font-display text-2xl font-bold">Un mar en movimiento</h3>
+          <p class="leading-relaxed text-ink">El agua y las especies se desplazan; las condiciones locales también cuentan.</p>
+        </article>
+        <article class="flex flex-col gap-2 bg-washi p-6 md:p-8">
+          <span class="font-display text-sm font-bold tracking-[0.12em] text-shu">BUCEO</span>
+          <h3 class="font-display text-2xl font-bold">Cada inmersión cambia</h3>
+          <p class="leading-relaxed text-ink">La estación y el estado del mar deciden buena parte del plan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-section">
+    <div class="wrap">
+      <div class="flex flex-col gap-16 lg:gap-24">
+        {sections.map((section) => (
+          <article
+            id={section.id}
+            class:list={[
+              'scroll-mt-28 gap-8 lg:gap-16',
+              section.photo
+                ? 'grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center'
+                : 'flex w-full flex-col',
+            ]}
+          >
+            {section.photo && (
+              <img
+                class="h-[clamp(240px,36vw,460px)] w-full object-cover"
+                src={section.photo.src}
+                alt={section.photo.alt}
+                loading="lazy"
+              />
+            )}
+            <div class="flex flex-col gap-5">
+              <h2 class="font-display text-[clamp(32px,3.4vw,48px)] leading-[1.08] font-bold">{section.title}</h2>
+              {section.paragraphs.map((paragraph) => <p class="text-[18px] leading-[1.8] text-ink">{paragraph}</p>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-section">
+    <div class="wrap flex flex-col gap-9">
+      <div class="max-w-3xl">
+        <Eyebrow jp="伊豆の海" label="Explora con nosotros" />
+        <h2 class="mt-4 font-display text-[clamp(36px,4vw,56px)] leading-tight font-bold">Explora los puntos de buceo de Izu</h2>
+        <p class="mt-4 text-lg leading-[1.75] text-ink">
+          La corriente es parte del paisaje, pero cada punto tiene su personalidad. Aquí van algunas puertas de entrada para explorarla.
+        </p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {kuroshio.locations.map((location) => (
+          <a class="group flex flex-col bg-white no-underline ring-1 ring-navy/10 transition-transform hover:-translate-y-1" href={url(location.href)}>
+            <img class="h-52 w-full object-cover" src={location.photo} alt={location.alt} loading="lazy" />
+            <div class="flex flex-1 flex-col items-start gap-3 p-5 md:p-6">
+              <span class="text-xs font-bold uppercase tracking-[0.12em] text-shu">{location.label}</span>
+              <h3 class="font-display text-2xl font-bold">{location.name}</h3>
+              <p class="text-[15px] leading-relaxed text-ink">{location.description}</p>
+              <span class="mt-auto pt-2 font-semibold text-navy group-hover:text-shu">Descubre el punto →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="text-sm leading-relaxed text-ink/80">
+        La presencia de especies, la temperatura y las condiciones pueden variar según la fecha y el estado del mar. Elegiremos el punto y el plan contigo.
+      </p>
+    </div>
+  </section>
+</PageLayout>

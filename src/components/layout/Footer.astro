@@ -1,0 +1,32 @@
+---
+import { site } from '../../data/content.js';
+import { url } from '../../lib/url';
+import Logo from '../ui/Logo.astro';
+
+const links = [
+  { href: url('puntos-buceo/'), label: 'Puntos de buceo' },
+  { href: url('razones-izu/'), label: '5 razones' },
+  { href: url('kuroshio/'), label: 'Kuroshio' },
+  { href: site.instagram, label: 'Instagram', ext: true },
+  { href: site.facebook, label: 'Facebook', ext: true },
+];
+---
+<footer class="bg-navy-deep pt-16 pb-12 text-washi">
+  <div class="wrap">
+    <div class="flex flex-col items-start justify-between gap-8 lg:flex-row">
+      <div class="flex items-center gap-3.5">
+        <span class="wave-light flex size-16 shrink-0 items-center justify-center rounded-full p-2">
+          <Logo width={48} />
+        </span>
+        <span class="flex flex-col">
+          <span class="font-display text-[28px] leading-none font-bold">{site.name}</span>
+          <span class="font-mincho text-xs tracking-[0.4em] text-coral" lang="ja">{site.nameJp}</span>
+        </span>
+      </div>
+      <div class="flex flex-wrap gap-x-14 gap-y-4">
+        {links.map((l) => <a class="text-washi no-underline hover:text-coral" href={l.href} target={l.ext ? '_blank' : undefined} rel={l.ext ? 'noopener' : undefined}>{l.label}</a>)}
+      </div>
+    </div>
+    <div class="mt-10 border-t border-washi/20 pt-6 text-sm text-mute">© {site.year} {site.name}</div>
+  </div>
+</footer>

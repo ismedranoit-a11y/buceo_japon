@@ -1,0 +1,33 @@
+---
+import { rates, courses, site } from '../data/content.js';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import IncludedBand from '../components/sections/IncludedBand.astro';
+import RateCard from '../components/sections/RateCard.astro';
+import Button from '../components/ui/Button.astro';
+import Heading from '../components/ui/Heading.astro';
+---
+<PageLayout
+  title="Tarifas de buceo en Izu | Buceo Japón"
+  description="Precios para 1 pax con botellas, tasas, guía en español y transporte incluidos."
+  ctaTitle="Haz tu reserva"
+  ctaText="Elige punto, fecha y número de buceadores en el formulario y te confirmo disponibilidad."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero jp="料金" label="Buceemos juntos" title="Tarifas claras, sin sorpresas"
+    lead="Todos los precios son para 1 pax e incluyen todos los gastos de buceo." />
+  <IncludedBand />
+
+  <section class="py-section">
+    <div class="wrap flex flex-col gap-7">
+      {rates.map((r) => <RateCard rate={r} />)}
+      <article id="cursos" class="flex scroll-mt-28 flex-col items-start gap-[clamp(28px,4vw,56px)] rounded-[clamp(20px,2vw,28px)] bg-navy p-[clamp(24px,3vw,44px)] text-cream lg:flex-row lg:items-center">
+        <div class="flex flex-1 flex-col gap-2.5">
+          <Heading size="rate">{courses.title}</Heading>
+          <span class="text-lg text-mute">{courses.text} — {courses.price}</span>
+        </div>
+        <Button href={site.bookingUrl}>Consultar curso</Button>
+      </article>
+    </div>
+  </section>
+</PageLayout>

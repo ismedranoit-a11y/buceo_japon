@@ -1,0 +1,81 @@
+---
+interface Moment {
+  title: string;
+  text: string;
+  tag: string;
+}
+
+interface Bring {
+  essentials: string[];
+  personalGear: string[];
+  note: string;
+}
+
+interface Props {
+  moments: Moment[];
+  bring: Bring;
+}
+
+const { moments, bring } = Astro.props;
+---
+<section class="bg-washi py-section">
+  <div class="wrap flex flex-col gap-16">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-mincho text-sm tracking-[0.2em] text-shu" lang="ja">海の一日</p>
+      <h2 class="mt-3 font-display text-[clamp(34px,4vw,52px)] leading-tight font-bold">Así transcurre el día</h2>
+      <p class="mt-4 text-lg leading-[1.8] text-ink">
+        Del encuentro en la estación a la vuelta, vamos paso a paso y con tiempo para preparar cada inmersión.
+      </p>
+    </div>
+
+    <ol class="mx-auto flex w-full max-w-4xl flex-col">
+      {moments.map((moment, index) => (
+        <li class="relative flex gap-5 pb-9 last:pb-0 md:gap-8">
+          <div class="relative flex w-8 shrink-0 justify-center">
+            <span class="relative z-[1] mt-1 size-4 rounded-full border-[3px] border-shu bg-washi"></span>
+            {index < moments.length - 1 && <span class="absolute top-5 bottom-0 w-0.5 bg-shu/35"></span>}
+          </div>
+          <article class="flex flex-1 flex-col gap-2 border-b border-navy/15 pb-7 last:border-0 last:pb-0">
+            <span class="text-xs font-bold uppercase tracking-[0.14em] text-shu">{moment.tag}</span>
+            <h3 class="font-display text-[clamp(24px,2.7vw,32px)] leading-tight font-bold">{moment.title}</h3>
+            <p class="max-w-3xl text-[17px] leading-[1.8] text-ink">{moment.text}</p>
+          </article>
+        </li>
+      ))}
+    </ol>
+
+    <section class="grid gap-8 border-t-4 border-shu bg-white p-6 md:grid-cols-[.8fr_1.2fr] md:p-9" aria-labelledby="bring-heading">
+      <div>
+        <p class="font-mincho text-sm tracking-[0.2em] text-shu" lang="ja">持ち物</p>
+        <h2 id="bring-heading" class="mt-2 font-display text-[clamp(30px,3vw,40px)] leading-tight font-bold">¿Qué tienes que traer?</h2>
+        <p class="mt-3 leading-[1.8] text-ink">Con unas pocas cosas personales tienes lo básico para pasar el día junto al mar.</p>
+      </div>
+
+      <div class="grid gap-7 sm:grid-cols-2">
+        <div>
+          <h3 class="font-display text-xl font-bold">Imprescindible</h3>
+          <ul class="mt-3 flex flex-col gap-3">
+            {bring.essentials.map((item) => (
+              <li class="flex items-center gap-3 text-[17px] text-ink">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-blush text-sm font-bold text-shu" aria-hidden="true">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-xl font-bold">Si tienes equipo propio</h3>
+          <ul class="mt-3 flex flex-col gap-3">
+            {bring.personalGear.map((item) => (
+              <li class="flex items-center gap-3 text-[17px] text-ink">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-mist text-sm font-bold text-navy" aria-hidden="true">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p class="mt-4 text-sm leading-[1.7] text-ink/80">{bring.note}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,117 @@
+---
+import { diveSites } from '../../data/content.js';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import PhotoPlaceholder from '../../components/ui/PhotoPlaceholder.astro';
+import Pill from '../../components/ui/Pill.astro';
+import Chip from '../../components/ui/Chip.astro';
+
+export function getStaticPaths() {
+  return diveSites.map((diveSite) => ({
+    params: { slug: diveSite.slug },
+    props: { diveSite },
+  }));
+}
+
+const { diveSite } = Astro.props;
+---
+<PageLayout
+  title={`${diveSite.name}: punto de buceo en ${diveSite.zone} | Buceo Japón`}
+  description={diveSite.description}
+  ctaTitle={`¿Te gustaría bucear en ${diveSite.name}?`}
+  ctaText="Escríbeme y organizamos los detalles de la inmersión."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero
+    jp={diveSite.kanji}
+    label={`${diveSite.zone} · ${diveSite.type}`}
+    title={diveSite.name}
+    lead={diveSite.description}
+    imageSrc={diveSite.photoSrc}
+    imageAlt={`Paisaje submarino de ${diveSite.name}`}
+  />
+
+  <section class="py-section">
+    <div class="wrap flex flex-col gap-[clamp(48px,7vw,88px)]">
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {[
+          { label: 'Hora de encuentro', value: diveSite.meetingTime },
+          { label: 'Punto de reunión', value: diveSite.meetingPoint },
+          { label: 'Profundidad', value: diveSite.depth },
+          { label: 'Nivel recomendado', value: diveSite.levelRecommended },
+        ].map((detail) => (
+          <article class="flex flex-col gap-2 rounded-[20px] bg-white p-6 ring-1 ring-navy/10">
+            <h2 class="font-display text-lg font-bold text-navy">{detail.label}</h2>
+            <p class="text-ink">{detail.value}</p>
+          </article>
+        ))}
+      </div>
+
+      {diveSite.highlights ? (
+        <section class="flex flex-col gap-7" aria-labelledby="site-highlights-heading">
+          <div class="flex flex-col gap-4">
+            <Pill size="md">{diveSite.type}</Pill>
+            <h2 id="site-highlights-heading" class="font-display text-[clamp(32px,3.4vw,48px)] leading-tight font-bold">
+              Lo mejor de bucear en {diveSite.name}
+            </h2>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2">
+            {diveSite.highlights.map((highlight, index) => (
+              <article class="flex flex-col items-start gap-4 bg-white p-6 ring-1 ring-navy/10 md:p-8">
+                <span class="font-display text-xl font-bold text-shu">{String(index + 1).padStart(2, '0')}</span>
+                <h3 class="font-display text-2xl leading-snug font-bold text-navy">{highlight.title}</h3>
+                <p class="text-base leading-[1.8] text-ink md:text-lg">{highlight.text}</p>
+                {'callout' in highlight && highlight.callout && (
+                  <p class="border-l-4 border-shu bg-washi px-4 py-3 text-base leading-[1.7] font-semibold text-navy md:text-lg">
+                    {highlight.callout}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <article class="flex flex-col gap-5">
+          <Pill size="md">{diveSite.type}</Pill>
+          <h2 class="font-display text-[clamp(32px,3.4vw,48px)] leading-none font-bold">Cómo es este punto</h2>
+          <p class="max-w-[850px] text-lg leading-[1.8] text-ink">{diveSite.description}</p>
+          <div class="flex flex-wrap gap-2.5">
+            {diveSite.chips.map((characteristic) => <Chip>{characteristic}</Chip>)}
+          </div>
+        </article>
+      )}
+
+      <section class="flex flex-col gap-7" aria-labelledby="species-heading">
+        <div>
+          <p class="font-mincho text-sm tracking-[0.2em] text-shu" lang="ja">海の生き物</p>
+          <h2 id="species-heading" class="mt-2 font-display text-[clamp(32px,3.4vw,48px)] leading-none font-bold">Especies y fotos</h2>
+
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {diveSite.species.map((species) => (
+            <figure class="m-0 flex flex-col gap-3">
+              <PhotoPlaceholder
+                label={species.name}
+                src={species.photo || undefined}
+                class="h-[clamp(220px,28vw,340px)] rounded-[20px]"
+              >
+                {species.probability != null && (
+                  <span
+                    class="absolute top-3 right-3 z-[2] rounded-full bg-navy-deep/90 px-3 py-1.5 text-sm font-bold text-cream"
+                    aria-label={`Probabilidad estimada: ${species.probability}% avisamiento`}
+                  >
+                    ≈{species.probability}% avistamiento
+                  </span>
+                )}
+              </PhotoPlaceholder>
+              <figcaption class="flex flex-col gap-1">
+                <span class="font-semibold text-ink">{species.name}</span>
+                {'note' in species && species.note && <span class="text-sm leading-relaxed text-ink/75">{species.note}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    </div>
+  </section>
+</PageLayout>

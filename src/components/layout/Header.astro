@@ -1,0 +1,49 @@
+---
+import { nav, site } from '../../data/content.js';
+import { url } from '../../lib/url';
+import Logo from '../ui/Logo.astro';
+import NavToggle from '../ui/NavToggle.astro';
+import JapaneseButton from '../home/JapaneseButton.astro';
+---
+<header class="sticky top-0 z-50 border-b border-navy/25 bg-washi">
+  <div class="wrap relative grid h-[76px] grid-cols-[1fr_auto] items-center gap-6 lg:h-[104px] lg:grid-cols-[1fr_auto_1fr]">
+    <nav
+      id="menu"
+      aria-label="Principal"
+      class="absolute inset-x-0 top-full hidden flex-col border-b border-navy/25 bg-washi px-[clamp(16px,6.6vw,96px)] pt-2 pb-6 shadow-[0_16px_32px_rgba(31,42,107,0.12)] nav-open:flex
+             lg:static lg:flex lg:flex-row lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none xl:gap-10"
+    >
+      {nav.map((item) => (
+        <div class="group relative border-b border-navy/25 lg:border-0">
+          <a class="flex items-baseline justify-between py-4 no-underline lg:flex-col lg:items-center lg:gap-0.5 lg:py-0" href={url(item.path)}>
+            <span class="text-lg font-medium lg:order-2 lg:text-[15px]">{item.short ?? item.label}</span>
+            <span class="font-mincho text-sm tracking-[0.2em] text-shu lg:text-[13px]" lang="ja">{item.jp}</span>
+          </a>
+          {item.submenu && (
+            <ul class="m-0 list-none p-0 pb-2 pl-4 lg:absolute lg:left-1/2 lg:top-full lg:z-50 lg:hidden lg:min-w-52 lg:-translate-x-1/2 lg:bg-washi lg:p-2 lg:shadow-[0_12px_24px_rgba(31,42,107,0.16)] lg:group-hover:block lg:group-focus-within:block">
+              {item.submenu.map((subitem) => (
+                <li>
+                  <a class="flex items-baseline justify-between gap-4 py-2 text-sm no-underline hover:text-shu focus-visible:text-shu lg:px-3" href={url(subitem.path)}>
+                    <span>{subitem.label}</span>
+                    <span class="font-mincho text-xs tracking-wider text-shu" lang="ja">{subitem.jp}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </nav>
+    <a class="order-first flex items-center gap-3.5 no-underline lg:order-none" href={url()} aria-label={`${site.name}, inicio`}>
+      <Logo width={56} eager class="h-[38px] w-[46px] object-contain lg:h-[46px] lg:w-14" />
+      <span class="flex flex-col">
+        <span class="font-display text-[23px] leading-none font-bold lg:text-[26px]">{site.name}</span>
+        <span class="font-mincho text-xs tracking-[0.4em] text-shu" lang="ja">{site.nameJp}</span>
+      </span>
+    </a>
+    <div class="flex items-center justify-end gap-3">
+      <JapaneseButton href={site.bookingUrl} variant="navy" size="sm" class="hidden lg:inline-flex"><span class="font-mincho text-sm text-coral" lang="ja">予約</span>Reservar</JapaneseButton>
+      <NavToggle controls="menu" class="rounded-none" />
+    </div>
+  </div>
+</header>

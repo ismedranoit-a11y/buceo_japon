@@ -1,0 +1,22 @@
+---
+import pulpo from '../../assets/pulpo.svg';
+
+interface Props {
+  width: number;
+  alt?: string;
+  class?: string;
+  eager?: boolean;
+}
+const { width, alt = '', class: className, eager = false } = Astro.props;
+// Proporción del SVG del pulpo: 992 × 832
+const height = Math.round((width * 832) / 992);
+---
+<img
+  src={pulpo.src}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : undefined}
+/>

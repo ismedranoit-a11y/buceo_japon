@@ -1,0 +1,60 @@
+---
+import '@fontsource/oswald/latin-500.css';
+import '@fontsource/oswald/latin-ext-500.css';
+import '@fontsource/oswald/latin-600.css';
+import '@fontsource/oswald/latin-ext-600.css';
+import '@fontsource/oswald/latin-700.css';
+import '@fontsource/oswald/latin-ext-700.css';
+import '@fontsource/figtree/latin-400.css';
+import '@fontsource/figtree/latin-ext-400.css';
+import '@fontsource/figtree/latin-500.css';
+import '@fontsource/figtree/latin-ext-500.css';
+import '@fontsource/figtree/latin-600.css';
+import '@fontsource/figtree/latin-ext-600.css';
+import '@fontsource/figtree/latin-700.css';
+import '@fontsource/figtree/latin-ext-700.css';
+import '@fontsource/shippori-mincho/japanese-500.css';
+import '@fontsource/shippori-mincho/latin-500.css';
+import '@fontsource/shippori-mincho/latin-ext-500.css';
+import '../styles/global.css';
+
+import waveLight from '../assets/seigaiha-claro.svg';
+import waveNavy from '../assets/seigaiha-marino.svg';
+import pulpo from '../assets/pulpo.svg';
+
+interface Props {
+  title: string;
+  description: string;
+  bodyClass?: string;
+}
+const { title, description, bodyClass } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+// Los fondos de olas se pasan como variables CSS para que el CSS no dependa de rutas.
+const vars = `--img-wave-light:url(${waveLight.src});--img-wave-navy:url(${waveNavy.src})`;
+---
+<!doctype html>
+<html lang="es" style={vars}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#1F2A6B" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:url" content={canonical} />
+    <link rel="icon" href={pulpo.src} type="image/svg+xml" />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="absolute -top-16 left-2 z-[100] rounded-lg bg-navy px-4 py-2.5 text-cream focus:top-2" href="#contenido">Saltar al contenido</a>
+    <slot name="header" />
+    <main id="contenido">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

@@ -1,0 +1,20 @@
+---
+import { cta, site } from '../../data/content.js';
+import Logo from '../ui/Logo.astro';
+import JapaneseButton from '../home/JapaneseButton.astro';
+interface Props { title?: string; text?: string }
+const { title = cta.title, text = cta.text } = Astro.props;
+---
+<section class="wave-navy">
+  <div class="wrap flex flex-col items-start gap-10 py-20 text-washi lg:flex-row lg:items-center lg:gap-[72px] lg:py-[120px]">
+    <div class="relative flex aspect-square w-[260px] shrink-0 items-center justify-center rounded-full bg-navy bg-cover bg-center lg:w-[420px]" style="background-image: url('/images/fondo.jpg')">
+      <Logo width={360} class="relative h-auto w-[86%]" />
+    </div>
+    <div class="flex w-full flex-col gap-6">
+      <span class="font-mincho text-lg tracking-[0.4em] text-coral" lang="ja">一緒に潜りましょう</span>
+      <h2 class="font-mincho text-[clamp(44px,5vw,72px)] leading-[1.1] font-extrabold">{title}</h2>
+      <p class="max-w-[560px] text-[19px] leading-[1.8] text-mute">{text}</p>
+      <JapaneseButton href={site.bookingUrl} variant="coral" size="lg" class="self-stretch sm:self-start">{cta.button}</JapaneseButton>
+    </div>
+  </div>
+</section>

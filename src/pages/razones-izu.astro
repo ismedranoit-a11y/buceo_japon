@@ -1,0 +1,24 @@
+---
+import { reasons } from '../data/content.js';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import FeatureRow from '../components/sections/FeatureRow.astro';
+---
+<PageLayout
+  title="5 razones para bucear en Izu | Buceo Japón"
+  description="Por qué la península de Izu es uno de los mejores destinos de buceo de Japón."
+  bodyClass="bg-washi font-gothic content-page"
+>
+  <PageHero jp="伊豆でダイビング" label="Guía" title="5 razones para bucear en Izu" lead="[Entradilla de la página actual]" />
+  <section class="py-section">
+    <div class="wrap flex flex-col gap-14 lg:gap-16">
+      {reasons.map((r, i) => (
+        <FeatureRow photo={r.photo} reverse={i % 2 === 0} numbered>
+          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">{String(i + 1).padStart(2, '0')}</span>
+          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">{r.title}</h2>
+          <p class="text-lg leading-[1.7] text-ink">{r.text}</p>
+        </FeatureRow>
+      ))}
+    </div>
+  </section>
+</PageLayout>

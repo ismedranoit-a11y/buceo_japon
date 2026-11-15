@@ -1,0 +1,14 @@
+---
+/** Título en Oswald. `size`: hero | page | section | sub | card */
+interface Props { as?: 'h1' | 'h2' | 'h3'; size?: 'hero' | 'page' | 'section' | 'sub' | 'card' | 'rate'; class?: string; id?: string }
+const { as: Tag = 'h2', size = 'section', class: className, id } = Astro.props;
+const sizes = {
+  hero: 'text-[clamp(48px,7.2vw,104px)] leading-[0.95] tracking-[-1px]',
+  page: 'text-[clamp(44px,5.6vw,80px)] leading-[0.98]',
+  section: 'text-[clamp(38px,4.4vw,64px)] leading-none',
+  sub: 'text-[clamp(34px,3.4vw,48px)] leading-none',
+  rate: 'text-[clamp(36px,3vw,44px)] leading-none',
+  card: 'text-[clamp(28px,2.6vw,36px)] leading-none font-semibold',
+};
+---
+<Tag id={id} class:list={['font-display font-bold tracking-[-0.5px]', sizes[size], className]}><slot /></Tag>

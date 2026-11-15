@@ -1,0 +1,36 @@
+---
+/** Botón hamburguesa. Abre/cierra el menú con id `controls` (añade .nav-open al <html>). */
+interface Props { controls: string; class?: string }
+const { controls, class: className } = Astro.props;
+---
+<button
+  class:list={['inline-flex size-12 cursor-pointer items-center justify-center bg-navy text-cream lg:hidden', className ?? 'rounded-full']}
+  type="button" aria-controls={controls} aria-expanded="false" aria-label="Abrir menú" data-nav-toggle
+>
+  <svg class="nav-open:hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+  <svg class="hidden nav-open:block" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+</button>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  if (toggle) {
+    const root = document.documentElement;
+    const nav = document.getElementById(toggle.getAttribute('aria-controls') ?? '');
+    const setOpen = (open: boolean) => {
+      root.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    };
+    toggle.addEventListener('click', () => setOpen(!root.classList.contains('nav-open')));
+    nav?.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && root.classList.contains('nav-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    matchMedia('(min-width: 1025px)').addEventListener('change', (mq) => mq.matches && setOpen(false));
+  }
+</script>

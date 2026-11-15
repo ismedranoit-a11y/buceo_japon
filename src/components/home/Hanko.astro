@@ -1,0 +1,13 @@
+---
+/** Sello rojo japonés (hanko) con un kanji. Decorativo. */
+interface Props { kanji: string; size?: 'md' | 'sm' }
+const { kanji, size = 'md' } = Astro.props;
+---
+<span
+  class:list={[
+    'inline-flex shrink-0 -rotate-[4deg] items-center justify-center rounded-md border-[3px] border-shu font-mincho font-extrabold text-shu',
+    size === 'sm' ? 'size-12 text-2xl' : 'size-12 text-2xl md:size-14 md:text-[28px]',
+  ]}
+  lang="ja"
+  aria-hidden="true"
+>{kanji}</span>
