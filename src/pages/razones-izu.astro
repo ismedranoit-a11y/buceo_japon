@@ -1,24 +1,89 @@
 ---
-import { reasons } from '../data/content.js';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHero from '../components/sections/PageHero.astro';
 import FeatureRow from '../components/sections/FeatureRow.astro';
 ---
 <PageLayout
-  title="5 razones para bucear en Izu | Buceo Japón"
-  description="Por qué la península de Izu es uno de los mejores destinos de buceo de Japón."
+  title="5 razones para bucear en Izu cerca de Tokio | Buceo Japón"
+  description="Descubre por qué bucear en Izu, cerca de Tokio, es una gran opción: paisajes volcánicos, vida marina y guía en español."
   bodyClass="bg-washi font-gothic content-page"
 >
-  <PageHero jp="伊豆でダイビング" label="Guía" title="5 razones para bucear en Izu" lead="[Entradilla de la página actual]" />
+  <PageHero
+    jp="伊豆でダイビング"
+    label="Guía de buceo"
+    title="5 razones para bucear en Izu"
+    lead="Descubre un destino de buceo cerca de Tokio, con paisajes volcánicos y acompañamiento en español."
+  />
   <section class="py-section">
     <div class="wrap flex flex-col gap-14 lg:gap-16">
-      {reasons.map((r, i) => (
-        <FeatureRow photo={r.photo} reverse={i % 2 === 0} numbered>
-          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">{String(i + 1).padStart(2, '0')}</span>
-          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">{r.title}</h2>
-          <p class="text-lg leading-[1.7] text-ink">{r.text}</p>
+      <div class="mx-auto flex max-w-3xl flex-col gap-5 text-lg leading-[1.8] text-ink">
+        <p>
+          Estás planeando tu <strong>viaje a Japón</strong>. Tienes decenas de lugares para comer y varios templos que visitar, además de los barrios más populares de Tokio. Pero sientes que necesitas algo <strong>más</strong>: algo que te <strong>conecte con la naturaleza</strong>, te permita desconectar del estrés de la ciudad y te deje un <strong>recuerdo imborrable</strong>. Quieres <strong>bucear en Japón</strong>, pero no sabes dónde.
+        </p>
+        <p>
+          Tu primera idea quizá sea Okinawa, uno de los destinos de buceo más conocidos del país. Pero los vuelos, los traslados y el tiempo que requiere la logística pueden ocupar buena parte de un viaje corto.
+        </p>
+        <p>
+          ¿Y si hubiera un lugar a <strong>unas dos horas de Tokio</strong> donde bucear en <strong>aguas templadas</strong>, entre paisajes volcánicos y con la tranquilidad de contar con un guía en español? Ese lugar es <strong>Izu</strong>. Estas son cinco razones para descubrirlo.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-14 lg:gap-16">
+        <FeatureRow photo="Hueco para foto: tren entre Tokio y Atami" reverse numbered>
+          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">01</span>
+          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">El factor tiempo: de la inmersión a cenar en Tokio</h2>
+          <p class="text-lg leading-[1.7] text-ink">
+            Japón es famoso por su transporte. <strong>Atami</strong> cuenta con parada de <strong>Shinkansen</strong> y el trayecto desde Tokio puede rondar los <strong>40 minutos</strong>, según el servicio. Desde la estación de Atami puedo recogerte para continuar hasta el punto de buceo.
+          </p>
+          <p class="text-lg leading-[1.7] text-ink">
+            Después de la inmersión, el regreso a Tokio puede llevar un par de horas, según el lugar y los horarios. Así puedes terminar el día disfrutando de una cena en un <strong>izakaya de Shibuya</strong>.
+          </p>
         </FeatureRow>
-      ))}
+
+        <FeatureRow photo="Hueco para foto: paisaje volcánico y vida marina" numbered>
+          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">02</span>
+          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">Paisajes volcánicos y vistas al Monte Fuji</h2>
+          <p class="text-lg leading-[1.7] text-ink">
+            <strong>Okinawa</strong> es conocida por sus arrecifes, pero Izu también tiene mucho que ofrecer. En Atami, los <strong>corales blandos</strong> cubren partes de las formaciones volcánicas. <strong>Izu Oceanic Park</strong>, por su parte, es uno de los lugares históricos del buceo japonés.
+          </p>
+          <p class="text-lg leading-[1.7] text-ink">
+            Los fondos volcánicos y la vida marina hacen que cada punto tenga su propio carácter. Según el lugar y las condiciones, puedes encontrar peces de mayor tamaño, como <strong>atunes</strong>, y especies de fondo como el <strong>tiburón cornudo</strong>. En Osezaki, cuando el día está despejado, también se puede disfrutar de las vistas al <strong>Monte Fuji</strong>.
+          </p>
+        </FeatureRow>
+
+        <FeatureRow photo="Hueco para foto: fauna de aguas templadas y cálidas" reverse numbered>
+          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">03</span>
+          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">Una mezcla única de aguas templadas y cálidas</h2>
+          <p class="text-lg leading-[1.7] text-ink">
+            La influencia de <strong>corrientes cálidas</strong> y las condiciones locales crean un entorno marino cambiante, donde pueden coincidir especies de aguas templadas y cálidas. La variedad de vida hace que <strong>cada inmersión sea distinta</strong>.
+          </p>
+          <p class="text-lg leading-[1.7] text-ink">
+            Lo que se ve depende del punto de buceo, la estación y el estado del mar: no hay dos días iguales bajo el agua.
+          </p>
+        </FeatureRow>
+
+        <FeatureRow photo="Hueco para foto: briefing o guía de buceo" numbered>
+          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">04</span>
+          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">Briefing en español y acompañamiento</h2>
+          <p class="text-lg leading-[1.7] text-ink">
+            Bucear en Japón es una experiencia increíble, pero la <strong>barrera del idioma</strong> puede preocupar. La actividad es <strong>en español</strong> y, como <strong>instructor SSI</strong>, te explicaré el plan de buceo y resolveré tus dudas antes de entrar al agua.
+          </p>
+          <p class="text-lg leading-[1.7] text-ink">
+            <strong>Briefings claros</strong> y comunicación directa ayudan a que disfrutes con más tranquilidad. Tú vienes a vivir la experiencia, no a depender de un traductor.
+          </p>
+        </FeatureRow>
+
+        <FeatureRow photo="Hueco para foto: ambiente de un centro de buceo local" reverse numbered>
+          <span class="font-display text-[clamp(64px,6.7vw,96px)] leading-[0.9] font-bold text-coral">05</span>
+          <h2 class="font-display text-[clamp(32px,3vw,44px)] leading-[1.05] font-bold">Bucea donde bucean los locales</h2>
+          <p class="text-lg leading-[1.7] text-ink">
+            Okinawa es un destino muy conocido; <strong>Izu</strong> te permite descubrir otra faceta del buceo en Japón y acercarte a zonas frecuentadas por quienes viven allí.
+          </p>
+          <p class="text-lg leading-[1.7] text-ink">
+            Conocerás el ambiente de un centro de buceo japonés, con <strong>atención personalizada</strong> y acompañamiento en español, sin perder de vista que cada lugar y temporada tienen su propio ritmo.
+          </p>
+        </FeatureRow>
+      </div>
     </div>
   </section>
 </PageLayout>

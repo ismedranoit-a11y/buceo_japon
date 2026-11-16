@@ -440,12 +440,6 @@ export const gallery = [
 ];
 
 // Pendiente: copiar los textos reales de la web actual.
-export const reasons = [1, 2, 3, 4, 5].map((n) => ({
-  title: `[Título de la razón ${n}]`,
-  text: `[Texto de la razón ${n} de la página actual]`,
-  photo: `Foto razón ${n}`,
-}));
-
 export const kuroshio = {
   lead: 'Izu está cerca de Tokio y recibe la influencia de la Kuroshio, una gran corriente cálida del Pacífico. No convierte el mar en un acuario tropical permanente —el océano tiene sus propios planes—, pero sí ayuda a explicar la variedad de vida que encontramos aquí.',
   sections: [
