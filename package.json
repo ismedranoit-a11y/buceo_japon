@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --port 4395",
     "publish:pages": "npm run build && node scripts/publish-pages.mjs",
     "test": "node --test scripts/*.test.mjs"
   },

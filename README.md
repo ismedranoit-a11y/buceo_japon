@@ -16,7 +16,7 @@ Arranca la web:
 npm run dev
 ```
 
-Abre la dirección que aparece en la terminal (normalmente `http://localhost:4321`). Astro actualiza la página al guardar. Para parar el servidor, pulsa `Ctrl + C`.
+Abre la dirección que aparece en la terminal (`http://localhost:4325`; la vista previa de `npm run preview` usa `http://localhost:4395`). Astro actualiza la página al guardar. Para parar el servidor, pulsa `Ctrl + C`.
 
 ## Carpetas
 
