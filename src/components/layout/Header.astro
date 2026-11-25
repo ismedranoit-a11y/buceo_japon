@@ -19,12 +19,13 @@ const stuckOnly =
       <a class="flex items-center gap-3.5 no-underline" href={url()} aria-label={`${site.name}, inicio`}>
         <Logo width={56} eager class="h-[38px] w-[46px] object-contain lg:h-[46px] lg:w-14" />
         <span class="flex flex-col">
-          <span class="font-logo text-[23px] leading-none font-bold lg:text-[26px]">{site.name}</span>
-          <span class="font-mincho text-xs tracking-[0.4em] text-shu" lang="ja">{site.nameJp}</span>
+          <span class="font-logo text-[20px] leading-none font-bold max-[359px]:sr-only lg:text-[26px]">{site.name}</span>
+          <span class="hidden font-mincho text-xs tracking-[0.4em] text-shu lg:block" lang="ja">{site.nameJp}</span>
         </span>
       </a>
       <div class="flex items-center justify-end gap-3">
         <JapaneseButton href={site.bookingUrl} variant="navy" size="sm" class="hidden lg:inline-flex"><span class="font-mincho text-sm text-coral" lang="ja">予約</span>Reservar</JapaneseButton>
+        <a class="inline-flex h-10 items-center bg-shu px-3 text-sm font-bold whitespace-nowrap text-paper no-underline hover:bg-coral-dark hover:text-paper lg:hidden" href={site.bookingUrl} target="_blank" rel="noopener">Reservar</a>
         <NavToggle controls="menu" class="rounded-none" />
       </div>
     </div>
@@ -35,12 +36,13 @@ const stuckOnly =
   <nav
     id="menu"
     aria-label="Principal"
-    class="absolute inset-x-0 top-full hidden max-h-[calc(100dvh-76px)] flex-col overflow-y-auto border-b border-navy/25 bg-washi px-[clamp(16px,6.6vw,96px)] pt-2 pb-6 shadow-[0_16px_32px_rgba(31,42,107,0.12)] nav-open:flex
+    class="absolute inset-x-0 top-full hidden max-h-[calc(100dvh-76px)] flex-col overflow-y-auto border-b border-navy/25 bg-washi px-[clamp(16px,6.6vw,96px)] pt-4 pb-6 shadow-[0_16px_32px_rgba(31,42,107,0.12)] nav-open:flex
            lg:static lg:mx-auto lg:grid lg:h-16 lg:max-h-none lg:max-w-[1440px] lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:overflow-visible lg:border-b-0 lg:bg-transparent lg:py-0 lg:shadow-none"
   >
     <a class:list={['hidden items-center justify-self-start no-underline lg:flex', stuckOnly]} href={url()} aria-label={`${site.name}, inicio`}>
       <Logo width={46} class="h-[38px] w-[46px] object-contain" />
     </a>
+    <a class="mb-2 flex min-h-[52px] items-center justify-center gap-2.5 bg-shu font-bold text-paper no-underline hover:bg-coral-dark hover:text-paper lg:hidden" href={site.bookingUrl} target="_blank" rel="noopener"><span class="font-mincho text-sm" lang="ja">予約</span>Reservar inmersión</a>
     <div class="contents lg:flex lg:items-center lg:gap-8 xl:gap-14">
       {nav.map((item) => (
         <div class="group relative border-b border-navy/25 lg:border-0">
