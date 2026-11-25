@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "publish:pages": "npm run build && node scripts/publish-pages.mjs"
+    "preview": "astro preview --port 4395",
+    "publish:pages": "npm run build && node scripts/publish-pages.mjs",
+    "test": "node --test scripts/*.test.mjs"
   },
   "engines": {
     "node": ">=18.20"

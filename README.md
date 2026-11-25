@@ -16,7 +16,7 @@ Arranca la web:
 npm run dev
 ```
 
-Abre la dirección que aparece en la terminal (normalmente `http://localhost:4321`). Astro actualiza la página al guardar. Para parar el servidor, pulsa `Ctrl + C`.
+Abre la dirección que aparece en la terminal (`http://localhost:4325`; la vista previa de `npm run preview` usa `http://localhost:4395`). Astro actualiza la página al guardar. Para parar el servidor, pulsa `Ctrl + C`.
 
 ## Carpetas
 
@@ -69,3 +69,26 @@ npm run publish:pages
 ```
 
 El comando compila Astro y copia el sitio generado a la raíz del repositorio, que es lo que publica GitHub Pages en este proyecto. Después, haz commit y push a `main`. No edites `dist/`: Astro la vuelve a crear al compilar.
+
+El comando también borra de la raíz las páginas que ya no existen en `src/pages/`. Para saber cuáles publicó, guarda la lista en `scripts/published-files.json`; haz commit de ese archivo junto con lo demás. Solo borra páginas (`.html`) que haya publicado él, y la carpeta de esa página si se queda vacía. Las imágenes nunca se borran. La primera vez que se usa todavía no hay lista, así que no borra nada.
+
+Para comprobar el comando de publicación:
+
+```bash
+npm test
+```
+
+## Quitar o renombrar una página
+
+Si borras una página, quien tenga el enlace antiguo verá un error 404. Para llevarlo a otra página, añade una redirección en `astro.config.mjs`:
+
+```js
+export default defineConfig({
+  redirects: {
+    '/tarifas/': '/precios/',
+  },
+  // ...
+});
+```
+
+Al publicar, Astro crea en la ruta antigua una página que manda al visitante a la nueva.

@@ -3,7 +3,7 @@ import { url } from '../../lib/url';
 import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
 ---
 <section class="py-[clamp(32px,4vw,56px)]">
-  <div class="wrap grid grid-cols-2 items-center gap-4 md:gap-12">
+  <div class="wrap grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-12">
     <PhotoPlaceholder
       label="El instructor de Buceo Japón en una barca rodeada de montañas"
       src="/images/mi-historia-barca.webp"
@@ -13,6 +13,7 @@ import PhotoPlaceholder from '../ui/PhotoPlaceholder.astro';
     <div class="flex flex-col gap-4">
       <a class="font-mincho text-[clamp(40px,4.2vw,60px)] leading-[1.15] font-bold" href={url('quien-soy/')}>Mi historia</a>
       <p class="text-lg leading-[1.9] text-ink">Te preguntarás: ¿cómo he llegado a ser instructor de buceo en Japón?</p>
+      <a class="inline-flex min-h-11 items-center self-start border-b-2 border-shu text-[17px] font-bold no-underline hover:text-shu" href={url('quien-soy/')}>Leer mi historia →</a>
     </div>
   </div>
 </section>

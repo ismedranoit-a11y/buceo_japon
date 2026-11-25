@@ -3,9 +3,14 @@ import { rates } from '../../data/content.js';
 import { url } from '../../lib/url';
 import SectionNumber from './SectionNumber.astro';
 import JapaneseHeading from './JapaneseHeading.astro';
+import Hanko from './Hanko.astro';
 
 const rows = rates.flatMap((r) => r.rows.map((row) => ({ label: `${r.shortName ?? r.name} · ${row.short.replace(' inm.', '')}`, price: row.price })));
-const gear = rates.map((r) => `${r.shortName ?? r.name} ${r.gear}`).join(' · ');
+// Gear rental range across dive sites, e.g. "¥5.000" to "¥8.000"
+const toNumber = (price) => Number(price.replace(/\D/g, ''));
+const gearPrices = rates.map((r) => r.gear).sort((a, b) => toNumber(a) - toNumber(b));
+const gearFrom = gearPrices[0];
+const gearTo = gearPrices[gearPrices.length - 1];
 const cell = 'border-r border-b border-navy/25 p-3 text-[15px] tabular-nums md:px-5 md:py-4 md:text-[17px]';
 ---
 <section class="pb-[clamp(80px,9.7vw,140px)]">
@@ -14,14 +19,17 @@ const cell = 'border-r border-b border-navy/25 p-3 text-[15px] tabular-nums md:p
       <SectionNumber kanji="三" label="料金" />
       <JapaneseHeading>Tarifas</JapaneseHeading>
       <p class="text-[17px] leading-[1.8] text-ink">Precio por persona. Incluye botellas, tasas, guía en español y transporte desde el punto de encuentro.</p>
-      <p class="text-[15px] leading-[1.7] text-ink">Equipo completo aparte: {gear}</p>
+      <div class="flex items-start gap-4 border-[1.5px] border-shu bg-paper p-4 md:px-5">
+        <Hanko kanji="具" size="sm" />
+        <p class="text-[15px] leading-[1.7] text-ink"><strong class="text-navy">¿No tienes equipo?</strong> Alquiler de equipo completo desde {gearFrom} hasta {gearTo}, según el punto.</p>
+      </div>
       <a class="text-[17px] font-bold" href={url('tarifas/')}>Ver todas las tarifas →</a>
     </div>
     <div class="w-full min-w-0 overflow-x-auto lg:flex-1" tabindex="0" role="region" aria-label="Tabla de tarifas">
-      <table class="w-full min-w-[400px] border-collapse border-t border-l border-navy/25 bg-paper text-left">
+      <table class="w-full border-collapse border-t border-l border-navy/25 bg-paper text-left">
         <caption class="sr-only">Tarifas por persona</caption>
         <thead>
-          <tr>{['Inmersiones', '1 pax'].map((h, i) => <th scope="col" class:list={[cell, 'text-sm font-bold tracking-[1px] md:text-sm', i === 0 && 'w-[65%]']}>{h}</th>)}</tr>
+          <tr>{['Inmersiones', 'Por persona'].map((h, i) => <th scope="col" class:list={[cell, 'text-sm font-bold tracking-[1px] whitespace-nowrap md:text-sm', i === 0 && 'w-[65%]']}>{h}</th>)}</tr>
         </thead>
         <tbody>
           {rows.map((r) => <tr><th scope="row" class={`${cell} font-normal`}>{r.label}</th><td class={cell}>{r.price}</td></tr>)}
