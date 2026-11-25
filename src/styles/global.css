@@ -3,6 +3,9 @@
 /* El menú móvil añade .nav-open al <html>: permite escribir `nav-open:flex` */
 @custom-variant nav-open (&:where(.nav-open, .nav-open *));
 
+/* The header adds .is-stuck once its top row scrolls away: permite escribir `stuck:visible` */
+@custom-variant stuck (&:where(.is-stuck, .is-stuck *));
+
 /* =============================================================================
    Tokens de diseño (colores del logo y tipografías)
    ============================================================================= */
@@ -25,6 +28,8 @@
   --color-sun: #F6C9C1;
 
   --font-display: Oswald, "Arial Narrow", sans-serif;
+  /* The logo keeps Oswald even where .content-page swaps --font-display */
+  --font-logo: Oswald, "Arial Narrow", sans-serif;
   --font-body: Figtree, "Helvetica Neue", Arial, sans-serif;
   --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", serif;
   --font-mincho: "Shippori Mincho B1", "Shippori Mincho", "Hiragino Mincho ProN", serif;
@@ -73,6 +78,9 @@
    ============================================================================= */
 @layer base {
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  /* Anchors (#kawana...) must not land under the sticky header */
+  html { scroll-padding-top: 92px; }
+  @media (min-width: 64.0625rem) { html { scroll-padding-top: 84px; } }
   body {
     font-family: var(--font-body);
     background: var(--color-cream);

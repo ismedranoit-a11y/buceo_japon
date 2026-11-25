@@ -3,29 +3,58 @@ import { nav, site } from '../../data/content.js';
 import { url } from '../../lib/url';
 import Logo from '../ui/Logo.astro';
 import NavToggle from '../ui/NavToggle.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
 import JapaneseButton from '../home/JapaneseButton.astro';
+
+// Elements that only appear in the sticky menu bar, once the top row has scrolled away.
+const stuckOnly =
+  'invisible opacity-0 transition-[opacity,visibility] duration-200 motion-reduce:transition-none stuck:visible stuck:opacity-100';
 ---
-<header class="sticky top-0 z-50 border-b border-navy/25 bg-washi">
-  <div class="wrap relative grid h-[76px] grid-cols-[1fr_auto] items-center gap-6 lg:h-[104px] lg:grid-cols-[1fr_auto_1fr]">
-    <nav
-      id="menu"
-      aria-label="Principal"
-      class="absolute inset-x-0 top-full hidden flex-col border-b border-navy/25 bg-washi px-[clamp(16px,6.6vw,96px)] pt-2 pb-6 shadow-[0_16px_32px_rgba(31,42,107,0.12)] nav-open:flex
-             lg:static lg:flex lg:flex-row lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none xl:gap-10"
-    >
+<!-- Sticky: on mobile the whole bar stays; on desktop the top row (88px) scrolls away and only the menu row stays. -->
+<header class="sticky top-0 z-50 border-b border-navy/25 bg-washi lg:-top-[88px]" data-header>
+  <!-- Top row: social links · centered logo · booking. On mobile: logo · menu button. -->
+  <div class="lg:border-b lg:border-navy/10" data-header-top>
+    <div class="wrap grid h-[76px] grid-cols-[1fr_auto] items-center gap-6 lg:h-[88px] lg:grid-cols-[1fr_auto_1fr]">
+      <SocialLinks class="hidden -ml-3 lg:flex" />
+      <a class="flex items-center gap-3.5 no-underline" href={url()} aria-label={`${site.name}, inicio`}>
+        <Logo width={56} eager class="h-[38px] w-[46px] object-contain lg:h-[46px] lg:w-14" />
+        <span class="flex flex-col">
+          <span class="font-logo text-[23px] leading-none font-bold lg:text-[26px]">{site.name}</span>
+          <span class="font-mincho text-xs tracking-[0.4em] text-shu" lang="ja">{site.nameJp}</span>
+        </span>
+      </a>
+      <div class="flex items-center justify-end gap-3">
+        <JapaneseButton href={site.bookingUrl} variant="navy" size="sm" class="hidden lg:inline-flex"><span class="font-mincho text-sm text-coral" lang="ja">予約</span>Reservar</JapaneseButton>
+        <NavToggle controls="menu" class="rounded-none" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Second row on desktop: small logo · the whole menu on one line · booking (logo and booking only while stuck).
+       On mobile: the drop-down menu. -->
+  <nav
+    id="menu"
+    aria-label="Principal"
+    class="absolute inset-x-0 top-full hidden max-h-[calc(100dvh-76px)] flex-col overflow-y-auto border-b border-navy/25 bg-washi px-[clamp(16px,6.6vw,96px)] pt-2 pb-6 shadow-[0_16px_32px_rgba(31,42,107,0.12)] nav-open:flex
+           lg:static lg:mx-auto lg:grid lg:h-16 lg:max-h-none lg:max-w-[1440px] lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:overflow-visible lg:border-b-0 lg:bg-transparent lg:py-0 lg:shadow-none"
+  >
+    <a class:list={['hidden items-center justify-self-start no-underline lg:flex', stuckOnly]} href={url()} aria-label={`${site.name}, inicio`}>
+      <Logo width={46} class="h-[38px] w-[46px] object-contain" />
+    </a>
+    <div class="contents lg:flex lg:items-center lg:gap-8 xl:gap-14">
       {nav.map((item) => (
         <div class="group relative border-b border-navy/25 lg:border-0">
           <a class="flex items-baseline justify-between py-4 no-underline lg:flex-col lg:items-center lg:gap-0.5 lg:py-0" href={url(item.path)}>
-            <span class="text-lg font-medium lg:order-2 lg:text-[15px]">{item.short ?? item.label}</span>
-            <span class="font-mincho text-sm tracking-[0.2em] text-shu lg:text-[13px]" lang="ja">{item.jp}</span>
+            <span class="text-lg font-medium lg:order-2 lg:text-[15px] lg:whitespace-nowrap">{item.short ?? item.label}</span>
+            <span class="font-mincho text-sm tracking-[0.2em] whitespace-nowrap text-shu lg:text-[13px]" lang="ja">{item.jp}</span>
           </a>
           {item.submenu && (
-            <ul class="m-0 list-none p-0 pb-2 pl-4 lg:absolute lg:left-1/2 lg:top-full lg:z-50 lg:hidden lg:min-w-52 lg:-translate-x-1/2 lg:bg-washi lg:p-2 lg:shadow-[0_12px_24px_rgba(31,42,107,0.16)] lg:group-hover:block lg:group-focus-within:block">
+            <ul class="m-0 list-none p-0 pb-2 pl-4 lg:absolute lg:left-1/2 lg:top-full lg:z-50 lg:hidden lg:w-max lg:-translate-x-1/2 lg:bg-washi lg:p-2 lg:shadow-[0_12px_24px_rgba(31,42,107,0.16)] lg:group-hover:block lg:group-focus-within:block">
               {item.submenu.map((subitem) => (
                 <li>
                   <a class="flex items-baseline justify-between gap-4 py-2 text-sm no-underline hover:text-shu focus-visible:text-shu lg:px-3" href={url(subitem.path)}>
-                    <span>{subitem.label}</span>
-                    <span class="font-mincho text-xs tracking-wider text-shu" lang="ja">{subitem.jp}</span>
+                    <span class="lg:whitespace-nowrap">{subitem.label}</span>
+                    <span class="font-mincho text-xs tracking-wider whitespace-nowrap text-shu" lang="ja">{subitem.jp}</span>
                   </a>
                 </li>
               ))}
@@ -33,17 +62,26 @@ import JapaneseButton from '../home/JapaneseButton.astro';
           )}
         </div>
       ))}
-    </nav>
-    <a class="order-first flex items-center gap-3.5 no-underline lg:order-none" href={url()} aria-label={`${site.name}, inicio`}>
-      <Logo width={56} eager class="h-[38px] w-[46px] object-contain lg:h-[46px] lg:w-14" />
-      <span class="flex flex-col">
-        <span class="font-display text-[23px] leading-none font-bold lg:text-[26px]">{site.name}</span>
-        <span class="font-mincho text-xs tracking-[0.4em] text-shu" lang="ja">{site.nameJp}</span>
-      </span>
-    </a>
-    <div class="flex items-center justify-end gap-3">
-      <JapaneseButton href={site.bookingUrl} variant="navy" size="sm" class="hidden lg:inline-flex"><span class="font-mincho text-sm text-coral" lang="ja">予約</span>Reservar</JapaneseButton>
-      <NavToggle controls="menu" class="rounded-none" />
     </div>
-  </div>
+    <a
+      class:list={['hidden h-10 items-center gap-2 justify-self-end bg-navy px-4 text-[15px] font-bold whitespace-nowrap text-washi no-underline hover:bg-navy-deep hover:text-washi lg:inline-flex', stuckOnly]}
+      href={site.bookingUrl}
+      target="_blank"
+      rel="noopener"
+    ><span class="font-mincho text-sm text-coral" lang="ja">予約</span>Reservar</a>
+    <SocialLinks class="-ml-3 pt-4 lg:hidden" />
+  </nav>
 </header>
+
+<script>
+  // Marks the header as stuck once its top row has scrolled out of view (desktop only matters:
+  // on mobile the stuck-only elements stay hidden).
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const top = header?.querySelector<HTMLElement>('[data-header-top]');
+  if (header && top) {
+    const update = () => header.classList.toggle('is-stuck', window.scrollY >= top.offsetHeight);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+  }
+</script>
