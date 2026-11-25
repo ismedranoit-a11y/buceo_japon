@@ -1,20 +1,37 @@
 ---
 import { cta, site } from '../../data/content.js';
+import { url } from '../../lib/url';
 import Logo from '../ui/Logo.astro';
-import JapaneseButton from '../home/JapaneseButton.astro';
 interface Props { title?: string; text?: string }
 const { title = cta.title, text = cta.text } = Astro.props;
+const waves = `background-image: url('${url('images/fondo.jpg')}')`;
 ---
-<section class="wave-navy">
-  <div class="wrap flex flex-col items-start gap-10 py-20 text-washi lg:flex-row lg:items-center lg:gap-[72px] lg:py-[120px]">
-    <div class="relative flex aspect-square w-[260px] shrink-0 items-center justify-center rounded-full bg-navy bg-cover bg-center lg:w-[420px]" style="background-image: url('/images/fondo.jpg')">
+<!-- Mobile: plain navy with a small round seal next to the title. Desktop: wave background with the large circle. -->
+<section class="bg-navy lg:wave-navy">
+  <div class="wrap flex flex-col items-start gap-10 py-14 text-washi lg:flex-row lg:items-center lg:gap-[72px] lg:py-[120px]">
+    <div class="relative hidden aspect-square w-[420px] shrink-0 items-center justify-center rounded-full bg-navy bg-cover bg-center lg:flex" style={waves}>
       <Logo width={360} class="relative h-auto w-[86%]" />
     </div>
-    <div class="flex w-full flex-col gap-6">
-      <span class="font-mincho text-lg tracking-[0.4em] text-coral" lang="ja">一緒に潜りましょう</span>
-      <h2 class="font-mincho text-[clamp(44px,5vw,72px)] leading-[1.1] font-extrabold">{title}</h2>
-      <p class="max-w-[560px] text-[19px] leading-[1.8] text-mute">{text}</p>
-      <JapaneseButton href={site.bookingUrl} variant="coral" size="lg" class="self-stretch sm:self-start">{cta.button}</JapaneseButton>
+    <div class="flex w-full flex-col gap-5 lg:gap-6">
+      <div class="order-1 flex items-center gap-4 lg:order-none">
+        <span
+          class="flex size-[92px] shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-washi bg-navy bg-cover bg-center lg:hidden"
+          style={waves}
+          aria-hidden="true"
+        >
+          <Logo width={92} class="h-auto w-[88%]" />
+        </span>
+        <h2 class="font-mincho text-[34px] leading-[1.1] font-extrabold lg:text-[clamp(44px,5vw,72px)]">{title}</h2>
+      </div>
+      <span class="order-2 font-mincho text-[15px] tracking-[0.35em] text-coral lg:order-first lg:text-lg lg:tracking-[0.4em]" lang="ja">一緒に潜りましょう</span>
+      <p class="order-3 max-w-[560px] text-[17px] leading-[1.8] text-mute lg:order-none lg:text-[19px]">{text}</p>
+      <!-- Fixed colors: .content-page swaps the coral token for red, which reads poorly on navy -->
+      <a
+        class="order-4 inline-flex min-h-[56px] items-center justify-center self-stretch border-[1.5px] border-transparent bg-[#EFA39B] px-[34px] text-lg font-bold text-navy no-underline transition-colors hover:bg-[#E88E83] hover:text-navy sm:self-start lg:order-none lg:min-h-[60px]"
+        href={site.bookingUrl}
+        target="_blank"
+        rel="noopener"
+      >{cta.button}</a>
     </div>
   </div>
 </section>
