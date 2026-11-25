@@ -1,19 +1,14 @@
 ---
-import { site } from '../../data/content.js';
+import { nav, site } from '../../data/content.js';
 import { url } from '../../lib/url';
 import Logo from '../ui/Logo.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
 
-const links = [
-  { href: url('puntos-buceo/'), label: 'Puntos de buceo' },
-  { href: url('razones-izu/'), label: '5 razones' },
-  { href: url('kuroshio/'), label: 'Kuroshio' },
-  { href: site.instagram, label: 'Instagram', ext: true },
-  { href: site.facebook, label: 'Facebook', ext: true },
-];
+const links = [...nav.map((item) => ({ href: url(item.path), label: item.label })), { href: url('razones-izu/'), label: '5 razones para bucear en Izu' }];
 ---
 <footer class="bg-navy-deep pt-16 pb-12 text-washi">
   <div class="wrap">
-    <div class="flex flex-col items-start justify-between gap-8 lg:flex-row">
+    <div class="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
       <div class="flex items-center gap-3.5">
         <span class="wave-light flex size-16 shrink-0 items-center justify-center rounded-full p-2">
           <Logo width={48} />
@@ -23,10 +18,15 @@ const links = [
           <span class="font-mincho text-xs tracking-[0.4em] text-coral" lang="ja">{site.nameJp}</span>
         </span>
       </div>
-      <div class="flex flex-wrap gap-x-14 gap-y-4">
-        {links.map((l) => <a class="text-washi no-underline hover:text-coral" href={l.href} target={l.ext ? '_blank' : undefined} rel={l.ext ? 'noopener' : undefined}>{l.label}</a>)}
-      </div>
+      <!-- Fixed colors: .content-page swaps the coral token for red, which reads poorly on navy -->
+      <a class="inline-flex min-h-[50px] w-full items-center justify-center gap-2.5 bg-sun lg:w-auto px-[26px] font-bold text-navy no-underline transition-colors hover:bg-washi hover:text-navy" href={site.bookingUrl} target="_blank" rel="noopener"><span class="font-mincho text-sm" lang="ja">予約</span>Reservar inmersión</a>
     </div>
-    <div class="mt-10 border-t border-washi/20 pt-6 text-sm text-mute">© {site.year} {site.name}</div>
+    <div class="mt-10 flex flex-col gap-6 border-t border-washi/20 pt-2 lg:flex-row lg:pt-8 lg:items-center lg:justify-between">
+      <nav aria-label="Pie de página" class="grid grid-cols-2 gap-x-4 lg:flex lg:flex-wrap lg:gap-x-10 lg:gap-y-3">
+        {links.map((l) => <a class="flex min-h-12 items-center border-b border-washi/12 text-washi no-underline hover:text-coral lg:min-h-0 lg:border-0" href={l.href}>{l.label}</a>)}
+      </nav>
+      <SocialLinks class="-ml-3 lg:-mr-3 lg:ml-0" />
+    </div>
+    <div class="mt-8 text-sm text-mute">© {site.year} {site.name}</div>
   </div>
 </footer>

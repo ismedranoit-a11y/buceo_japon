@@ -2,11 +2,11 @@
 import { stats } from '../../data/content.js';
 ---
 <section class="bg-navy text-washi" aria-label="En cifras">
-  <div class="wrap grid min-h-[120px] grid-cols-2 items-center gap-x-4 gap-y-5 py-6 lg:grid-cols-3">
+  <div class="wrap grid min-h-[120px] grid-cols-3 items-center gap-x-0 py-6 md:gap-x-4">
     {stats.map((s) => (
-      <div class="flex flex-wrap items-baseline gap-x-3.5 gap-y-1 border-l border-washi/30 pl-3.5 md:pl-6">
-        <span class="font-mincho text-[28px] font-bold text-coral md:text-[34px]" lang="ja">{s.jpValue}</span>
-        <span class="text-[15px]">{s.jpLabel}</span>
+      <div class="flex flex-col items-center gap-1.5 border-washi/30 px-1.5 text-center not-first:border-l md:flex-row md:flex-wrap md:items-baseline md:gap-x-3.5 md:gap-y-1 md:border-l md:px-0 md:pl-6 md:text-left">
+        <span class="font-mincho text-[24px] font-bold text-coral md:text-[34px]" lang="ja">{s.jpValue}</span>
+        <span class="text-[13px] leading-snug md:text-[15px]">{s.jpLabel}</span>
       </div>
     ))}
   </div>
