@@ -68,7 +68,7 @@ export const footerColumns = [
 ];
 
 export const stats = [
-  { value: 'SSI', label: 'instructor oficial freelance', jpValue: 'SSI', jpLabel: 'Instructor oficial　SSI' },
+  { value: 'SSI', label: 'instructor oficial freelance', jpValue: 'SSI', jpLabel: 'Instructor oficial' },
   { value: '5 puntos', label: 'en Izu y Numazu', jpValue: '伊豆', jpLabel: 'Múltiples puntos de buceo' },
   { value: '1–4 pax', label: 'grupos pequeños', jpValue: '少人数', jpLabel: 'Grupos de 1 a 4 personas' },
 ];

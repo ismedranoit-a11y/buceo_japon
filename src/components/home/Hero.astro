@@ -15,15 +15,15 @@ import JapaneseButton from './JapaneseButton.astro';
     <div class="order-3 flex w-full min-w-0 basis-full flex-col gap-6 md:gap-8 lg:order-none lg:w-[600px] lg:basis-auto lg:shrink">
       <div class="flex items-center gap-4"><Hanko kanji="潜" /><span class="text-sm font-bold uppercase tracking-[1.6px]">Guía e instructor SSI en español</span></div>
       <h1 class="font-mincho text-[clamp(48px,6.4vw,92px)] leading-[1.08] font-extrabold">Explora el azul de Japón</h1>
-      <p class="text-[19px] leading-[1.8] text-ink">Inmersiones guiadas y cursos por toda la península de Atami. Buceo tranquilo, sin prisas, y todo explicado en tu idioma.</p>
+      <p class="text-[19px] leading-[1.8] text-ink lg:max-w-[480px]">Inmersiones guiadas y cursos por toda la península de Izu. Buceo tranquilo, sin prisas, y todo explicado en tu idioma.</p>
       <div class="flex flex-wrap gap-3.5">
         <JapaneseButton href={site.bookingUrl} class="max-sm:flex-1 max-sm:basis-full">Reservar inmersión</JapaneseButton>
         <JapaneseButton href={url('puntos-buceo/')} variant="line" class="max-sm:flex-1 max-sm:basis-full">Puntos de buceo</JapaneseButton>
       </div>
     </div>
     <div class="relative order-2 flex h-[260px] min-w-[220px] flex-1 items-center justify-center md:h-[340px] lg:order-none lg:h-[620px] min-[1440px]:min-w-0">
-      <span class="absolute aspect-square h-[min(560px,96%)] rounded-full bg-navy bg-cover bg-center" style="background-image: url('/images/fondo.jpg')" aria-hidden="true"></span>
-      <Logo width={560} alt="Pulpo de Buceo Japón" eager class="relative h-auto max-h-full w-full max-w-[560px] object-contain min-[1440px]:w-[560px] min-[1440px]:max-w-none min-[1440px]:shrink-0" />
+      <span class="absolute aspect-square h-[min(560px,96%)] rounded-full lg:h-auto lg:max-h-[96%] lg:w-[min(560px,calc(100%+112px))] bg-navy bg-cover bg-center" style="background-image: url('/images/fondo.jpg')" aria-hidden="true"></span>
+      <Logo width={560} alt="Pulpo de Buceo Japón" eager class="relative h-auto max-h-full w-full max-w-[560px] object-contain lg:w-[min(560px,calc(100%+112px))] lg:max-w-none lg:shrink-0" />
     </div>
   </div>
 </section>
